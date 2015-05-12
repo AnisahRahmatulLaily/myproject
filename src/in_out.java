@@ -1,10 +1,10 @@
 
 
 import java.util.Scanner;
-public class in_out extends ruang{
+public class in_out extends induk{
     Scanner in = new Scanner(System.in);
     ruang d;
-    control j = new  control();
+   // control j = new  control();
    // control a= new control();
     int i,r,LCD=0,AC=0,lampu=0, kipas=0,steker=0,CCTV=0;
     //super_tb a;
@@ -19,9 +19,13 @@ public class in_out extends ruang{
 //                
 //    //d = new ruang (nama_ruang,lokasi_ruang,fakultas);
 //    }
-    @Override
-    void setdata (String nama_ruang, String lokasi_ruang, String fakultas){
-     super.setdata(nama_ruang, lokasi_ruang, fakultas);
+    
+//    @Override
+//    void setdata (String nama_ruang, String lokasi_ruang, String fakultas){
+//     super.setdata(nama_ruang, lokasi_ruang, fakultas);
+//    }
+    public void input(){
+        input_identitas_ruang_kelas();
     }
     public void input_kondisi_ruang_kelas(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela) {
 		System.out.println("masukan panjang");
@@ -33,14 +37,14 @@ public class in_out extends ruang{
 		System.out.println("masukan jumlah pintu");
 		pintu = in.nextInt();
 		System.out.println("masukan jumlah jendela");
-		jendela = in.nextInt();
-                j.hitung_luas_ruang();
+		jendela = in.nextInt(); 
+              //  j.hitung_luas_ruang();
                 //d = new ruang (panjang_ruang,lebar_ruang,jumlah_kursi,pintu,jendela);
 	}
-    @Override
-    void setdata(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela){
-        setdata(panjang_ruang, lebar_ruang, jumlah_kursi, pintu, jendela);
-    }
+//    @Override
+//    void setdata(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela){
+//        setdata(panjang_ruang, lebar_ruang, jumlah_kursi, pintu, jendela);
+//    }
     public void kondisi_dan_posisi_sarana(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
             String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
             String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin,
@@ -121,12 +125,12 @@ public class in_out extends ruang{
 		kondisi_CCTV=in.next();
 		//analisis_CCTV();
     }
-    void setdata(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
-            String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
-            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin,
-            int jumlah_AC, String kondisi_AC,String posisi_AC,String SSID, String bandwidth, int jumlah_CCTV, String kondisi_CCTV, String posisi_CCTV){
-        setdata(jumlah_steker, kondisi_steker, posisi_steker, jumlah_kabel_LCD, kondisi_kabel_LCD, posisi_kabel_LCD, jumlah_lampu, kondisi_lampu, posisi_lampu, jumlah_kipas_angin, kondisi_kipas_angin, posisi_kipas_angin, jumlah_AC, kondisi_AC, posisi_AC, SSID, bandwidth, jumlah_CCTV, kondisi_CCTV, posisi_CCTV);
-    }
+//    void setdata(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
+//            String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
+//            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin,
+//            int jumlah_AC, String kondisi_AC,String posisi_AC,String SSID, String bandwidth, int jumlah_CCTV, String kondisi_CCTV, String posisi_CCTV){
+//        setdata(jumlah_steker, kondisi_steker, posisi_steker, jumlah_kabel_LCD, kondisi_kabel_LCD, posisi_kabel_LCD, jumlah_lampu, kondisi_lampu, posisi_lampu, jumlah_kipas_angin, kondisi_kipas_angin, posisi_kipas_angin, jumlah_AC, kondisi_AC, posisi_AC, SSID, bandwidth, jumlah_CCTV, kondisi_CCTV, posisi_CCTV);
+//    }
     public void input_lingkungan_ruang_kelas(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela) {
 		System.out.println("kondisi lantai");
 		kondisi_lantai = in.next();
@@ -139,10 +143,10 @@ public class in_out extends ruang{
 		System.out.println("kondisi jendela");
 		kondisi_jendela = in.next();
 	}
-    @Override
-   void setdata(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela){
-        setdata(kondisi_lantai, kondisi_dinding, kondisi_atap, kondisi_pintu, kondisi_jendela);
-    }
+//    @Override
+//   void setdata(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela){
+//        setdata(kondisi_lantai, kondisi_dinding, kondisi_atap, kondisi_pintu, kondisi_jendela);
+//    }
     public void kebersihan_ruang_kelas(String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu) {
 		System.out.println("masukan sirkulasi udara");
 		sirkulasi_udara = in.nextLine();
@@ -153,10 +157,10 @@ public class in_out extends ruang{
 		System.out.println("Masukan suhu Celcius");
 		suhu = in.nextInt();
 	}
-    @Override
-    void setdata (String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu){
-        setdata(sirkulasi_udara, pencahayaan, kelembapan, suhu);  
-    }
+//    @Override
+//    void setdata (String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu){
+//        setdata(sirkulasi_udara, pencahayaan, kelembapan, suhu);  
+//    }
     public void kenyamanan_ruang_kelas(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan) {
 		System.out.println("masukan kebisingan");
 		kebisingan = in.nextInt();
@@ -169,10 +173,10 @@ public class in_out extends ruang{
 		System.out.println("masukan keausan");
 		keausan = in.nextLine();
 	}
-    @Override
-    void setdata (int kebisingan, String bau, String kebocoran, String kerusakan, String keausan){
-        setdata(kebisingan, bau, kebocoran, kerusakan, keausan);
-    }
+//    @Override
+//    void setdata (int kebisingan, String bau, String kebocoran, String kerusakan, String keausan){
+//        setdata(kebisingan, bau, kebocoran, kerusakan, keausan);
+//    }
     public void keamanan_ruang(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya) {
 		System.out.println("input kekokohan");
 		kekokohan=in.next();
@@ -183,9 +187,9 @@ public class in_out extends ruang{
 		System.out.println("bahaya atau aman ?");
                 bahaya = in.next();
 	}
-    void setdata(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya){
-        setdata(kekokohan, jumlah_kunci, jumlah_jendela, bahaya);
-    }
+//    void setdata(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya){
+//        setdata(kekokohan, jumlah_kunci, jumlah_jendela, bahaya);
+//    }
     
     
     public void tampil (){

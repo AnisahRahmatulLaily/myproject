@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class control extends in_out implements inter{
+public class control extends in_out{
     
     
     ruang ru = new ruang() {};
@@ -12,7 +12,6 @@ public class control extends in_out implements inter{
     int i,r,LCD=0,AC=0,lampu=0, kipas=0,steker=0,CCTV=0;
 //    public  void analisis_hitung_ruang (){
 //    }
-    @Override
     public double hitung_luas_ruang() {
 		return ru.getPanjang_ruang() * ru.getLebar_ruang();
 	}
