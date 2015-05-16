@@ -11,16 +11,16 @@ import java.util.Scanner;
  *
  * @author TOSHIBA
  */
-public class induk extends ruang{
-    Scanner in = new Scanner(System.in);
-    public void input_identitas_ruang_kelas() {
-		System.out.println("input ruang kelas");
-		setNama_ruang(in.next());
-		System.out.println("input lokasi ruang kelas");
-		setLokasi_ruang(in.next());
-                System.out.println("pilih fakultas");
-		setFakultas(in.next());
+public abstract class induk  {
+//    Scanner in = new Scanner(System.in);
+ abstract void input_identitas_ruang_kelas();
+//		System.out.println("input ruang kelas");
+//		setNama_ruang(in.next());
+//		System.out.println("input lokasi ruang kelas");
+//		setLokasi_ruang(in.next());
+//                System.out.println("pilih fakultas");
+//		setFakultas(in.next());
                 
     
 }
-}
+

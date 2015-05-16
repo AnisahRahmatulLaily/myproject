@@ -47,6 +47,19 @@ public class ruang {
     private String bahaya;
     private int jumlah_kunci;
 
+    ruang(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela) {
+        this.panjang_ruang= panjang_ruang;
+        this.lebar_ruang=lebar_ruang;
+        this.jumlah_kursi = jumlah_kursi;
+        this.jumlah_pintu = jumlah_pintu;
+        this.jumlah_jendela=jumlah_jendela;
+        
+    }
+    ruang (String nama_ruang, String lokasi_ruang, String fakultas){
+        this.nama_ruang = nama_ruang;
+        this.lokasi_ruang=lokasi_ruang;
+        this.fakultas=fakultas;
+    }
     //private String bahaya;
     public void setNama_ruang(String nama_ruang) {
         this.nama_ruang = nama_ruang;
@@ -406,20 +419,16 @@ public class ruang {
     public int getJumlah_kunci() {
         return jumlah_kunci;
     }
-    void setdata (String nama_ruang, String lokasi_ruang, String fakultas){
-        this.nama_ruang = nama_ruang;
-        this.lokasi_ruang=lokasi_ruang;
-        this.fakultas=fakultas;
-    }
     
-   void setdata(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela){
-        this.panjang_ruang= panjang_ruang;
-        this.lebar_ruang=lebar_ruang;
-        this.jumlah_kursi = jumlah_kursi;
-        this.jumlah_pintu = pintu;
-        this.jumlah_jendela=jendela;
-    }
-    void setdata(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
+//    
+//   void ruang(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela){
+//        this.panjang_ruang= panjang_ruang;
+//        this.lebar_ruang=lebar_ruang;
+//        this.jumlah_kursi = jumlah_kursi;
+//        this.jumlah_pintu = pintu;
+//        this.jumlah_jendela=jendela;
+//    }
+    void ruang(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
             String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
             String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin,
             int jumlah_AC, String kondisi_AC,String posisi_AC,String SSID, String bandwidth, int jumlah_CCTV, String kondisi_CCTV, String posisi_CCTV){
@@ -444,27 +453,27 @@ public class ruang {
         this.kondisi_CCTV=kondisi_CCTV;
         this.posisi_CCTV=posisi_CCTV;
     }
-    void setdata (String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela){
+    void ruang (String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela){
         this.kondisi_lantai=kondisi_lantai;
         this.kondisi_dinding=kondisi_dinding;
         this.kondisi_atap=kondisi_atap;
         this.kondisi_pintu=kondisi_pintu;
         this.kondisi_jendela=kondisi_jendela;
     }
-    void setdata (String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu){
+    void ruang (String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu){
         this.sirkulasi_udara=sirkulasi_udara;
         this.pencahayaan=pencahayaan;
         this.kelembapan=kelembapan;
         this.suhu=suhu;
     }
-    void setdata(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan){
+    void ruang(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan){
         this.kebisingan=kebisingan;
         this.bau=bau;
         this.kebocoran=kebocoran;
         this.kerusakan=kerusakan;
         this.keausan=keausan;
     }
-    void setdata(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya){
+    void ruang(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya){
         this.kekokohan=kekokohan;
         this.jumlah_kunci=jumlah_kunci;
         this.jumlah_jendela=jumlah_jendela;

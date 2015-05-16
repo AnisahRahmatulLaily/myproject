@@ -8,40 +8,37 @@ public class in_out extends induk{
    // control a= new control();
     int i,r,LCD=0,AC=0,lampu=0, kipas=0,steker=0,CCTV=0;
     //super_tb a;
-    //@Override
-//    void input_identitas_ruang_kelas(String nama_ruang, String lokasi_ruang, String fakultas) {
-//		System.out.println("input ruang kelas");
-//		nama_ruang= in.next();
-//		System.out.println("input lokasi ruang kelas");
-//		lokasi_ruang=in.next();
-//		System.out.println("pilih fakultas");
-//		fakultas=in.next();
-//                
-//    //d = new ruang (nama_ruang,lokasi_ruang,fakultas);
-//    }
+    @Override
+    void input_identitas_ruang_kelas() {
+		System.out.println("input ruang kelas");
+		d.setNama_ruang(in.next());
+		System.out.println("input lokasi ruang kelas");
+		d.setLokasi_ruang(in.next());
+		System.out.println("pilih fakultas");
+		d.setFakultas(in.next());              
+    d = new ruang(d.getNama_ruang(),d.getLokasi_ruang(),d.getFakultas());
+    }
     
 //    @Override
 //    void setdata (String nama_ruang, String lokasi_ruang, String fakultas){
 //     super.setdata(nama_ruang, lokasi_ruang, fakultas);
 //    }
-    public void input(){
-        input_identitas_ruang_kelas();
-    }
-    public void input_kondisi_ruang_kelas(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela) {
+    
+    public void input_kondisi_ruang_kelas() {
 		System.out.println("masukan panjang");
-		panjang_ruang = in.nextInt();
+		d.setPanjang_ruang(in.nextInt());
 		System.out.println("masukan lebar");
-		lebar_ruang = in.nextInt();
+		d.setLebar_ruang(in.nextInt()); 
 		System.out.println("masukan jumlah kursi");
-		jumlah_kursi = in.nextInt();
+		d.setJumlah_kursi(in.nextInt());
 		System.out.println("masukan jumlah pintu");
-		pintu = in.nextInt();
+		d.setJumlah_pintu(in.nextInt());
 		System.out.println("masukan jumlah jendela");
-		jendela = in.nextInt(); 
+		d.setJumlah_jendela(in.nextInt());  
               //  j.hitung_luas_ruang();
-                //d = new ruang (panjang_ruang,lebar_ruang,jumlah_kursi,pintu,jendela);
+               d = new ruang (d.getPanjang_ruang(),d.getLebar_ruang(),d.getJumlah_kursi(),d.getJumlah_pintu(),d.getJumlah_jendela());
 	}
-//    @Override
+//@Override
 //    void setdata(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int pintu, int jendela){
 //        setdata(panjang_ruang, lebar_ruang, jumlah_kursi, pintu, jendela);
 //    }
@@ -232,7 +229,6 @@ public class in_out extends induk{
  public ruang getruang(){
         return d;
             }
-
    
     
 }
