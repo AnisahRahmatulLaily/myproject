@@ -257,32 +257,79 @@ public class in_out extends induk implements interfa {
     
     @Override
     public void output(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("=== KONDISI RUANG KELAS ===");
+        System.out.println("Panjang Ruang : "+panjang_ruang);
+        System.out.println("Lebar Ruang : "+lebar_ruang);
+        System.out.println("Jumlah Kursi : "+jumlah_kursi);
+        System.out.println("Jumlah Pintu : "+jumlah_pintu);
+        System.out.println("Jumlah Jendela : "+jumlah_jendela);
     }
 
     @Override
-    public void output(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu, String kondisi_lampu, String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin, int jumlah_AC, String kondisi_AC, String posisi_AC, String SSID, String bandwidth, int jumlah_CCTV, String kondisi_CCTV, String posisi_CCTV) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void output(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD,
+            String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu, String kondisi_lampu, 
+            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin, 
+            int jumlah_AC, String kondisi_AC, String posisi_AC, String SSID, String bandwidth, int jumlah_CCTV, 
+            String kondisi_CCTV, String posisi_CCTV) {
+        System.out.println("=== KONDISI SARANA ===");
+        System.out.println("Jumlah Steker : "+jumlah_steker);
+        System.out.println("Kondisi Steker : "+kondisi_steker);
+        System.out.println("Posisi Steker : "+posisi_steker);
+        System.out.println("Jumlah Kabel LCD : "+jumlah_kabel_LCD);
+        System.out.println("Kondisi Kabel LCD :"+kondisi_kabel_LCD);
+        System.out.println("Posisi Kabel LCD :"+posisi_kabel_LCD);
+        System.out.println("Jumlah Lampu :"+jumlah_lampu);
+        System.out.println("Kondisi Lampu :"+kondisi_lampu);
+        System.out.println("Posisi Lampu :"+posisi_lampu);
+        System.out.println("Jumlah Kipas Angin :"+jumlah_kipas_angin);
+        System.out.println("Kondisi Kipas Angin :"+kondisi_kipas_angin);
+        System.out.println("Posisi Kipas Angin :"+posisi_kipas_angin);
+        System.out.println("Jumlah AC :"+jumlah_AC);
+        System.out.println("Kondisi AC :"+kondisi_AC);
+        System.out.println("Posisi AC :"+posisi_AC);
+        System.out.println("SSID : "+SSID);
+        System.out.println("Bandwidth :"+bandwidth);
+        System.out.println("jumlah CCTV :"+jumlah_CCTV);
+        System.out.println("Kondisi CCTV : "+kondisi_CCTV);
+        System.out.println("Posisi CCTV : "+posisi_CCTV);
+        
     }
 
     @Override
     public void output(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("===KONDISI===");
+        System.out.println("Kondisi Lantai : "+kondisi_lantai);
+        System.out.println("Kondisi Dinding :"+kondisi_dinding);
+        System.out.println("Kondisi Atap :"+kondisi_atap);
+        System.out.println("Kondisi Pintu :"+kondisi_pintu);
+        System.out.println("Kondisi Jendela :"+kondisi_jendela);
     }
 
     @Override
     public void output(String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("===KONDISI===");
+        System.out.println("Sirkulasi Udara :"+sirkulasi_udara);
+        System.out.println("Pencahayaan :"+pencahayaan);
+        System.out.println("Pencahayaan :"+kelembapan);
+        System.out.println("Suhu :"+suhu);
     }
 
     @Override
     public void output(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("===KONDISI===");
+        System.out.println("Kebisingan :"+kebisingan);
+        System.out.println("Bau :"+bau);
+        System.out.println("kebocoran :"+kebocoran);
+        System.out.println("Kerusakan :"+kerusakan);
+        System.out.println("Keausan :"+keausan);
     }
 
     @Override
     public void output(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("===KONDISI===");
+        System.out.println("Kekokohan :"+kekokohan);
+        System.out.println("Jumlah Kunci :"+jumlah_kunci);
+        System.out.println("Bahaya :"+bahaya);
     }
 
     @Override
