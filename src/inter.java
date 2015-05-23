@@ -7,7 +7,7 @@
 
 
 /**
- *
+ * pupupu
  * @author TOSHIBA
  */
 public interface inter {
