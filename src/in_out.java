@@ -1,5 +1,6 @@
  
 import java.util.Scanner;
+import javax.swing.JTextField;
 
 public class in_out extends induk implements interfa {
 
@@ -12,20 +13,32 @@ public class in_out extends induk implements interfa {
     int i, r, LCD = 0, AC = 0, lampu = 0, kipas = 0, steker = 0, CCTV = 0;
 
     //super_tb a;
-    @Override
-    public void input_identitas_ruang_kelas() {
-        System.out.println("input ruang kelas");
-        d.setNama_ruang(in.next());
-        System.out.println("input lokasi ruang kelas");
-        d.setLokasi_ruang(in.next());
-        System.out.println("pilih fakultas");
-        d.setFakultas(in.next());
+    
+    public in_out(JTextField nama,JTextField lokasi, JTextField kelas) {
+//        System.out.println("input ruang kelas");
+        d.setNama_ruang(nama.getText());
+//        System.out.println("input lokasi ruang kelas");
+        d.setLokasi_ruang(lokasi.getText());
+//        System.out.println("pilih fakultas");
+        d.setFakultas(kelas.getText());
         f = new ruang(d.getNama_ruang(), d.getLokasi_ruang(), d.getFakultas());
+    }
+    public in_out(){
+        
+    }
+    @Override
+    public void input_identitas_kelas(){
+        new identitaskelas().setVisible(true);
     }
 
 //    @Override
 //    void setdata (String nama_ruang, String lokasi_ruang, String fakultas){
 //     super.setdata(nama_ruang, lokasi_ruang, fakultas);
+//    }
+//    public in_out(JTextField panjang,JTextField lebar,JTextField kursi,JTextField pintu,JTextField jendela){
+//        String p= (panjang.getText());
+   // d.setPanjang_ruang(int.parse);
+        
 //    }
     @Override
     public void input_kondisi_ruang_kelas() {
@@ -212,43 +225,43 @@ public class in_out extends induk implements interfa {
 //        setdata(kekokohan, jumlah_kunci, jumlah_jendela, bahaya);
 //    }
 
-    public void tampil() {
-        System.out.println("ruang : " + d.getNama_ruang());
-        System.out.println("lokasi : " + d.getLokasi_ruang());
-        System.out.println("fakultas : " + d.getFakultas());
-            //System.out.println("panjang ruang :"+getPanjang_ruang());
-        //System.out.println("lebar ruang :"+d.getLebar_ruang());
-        //System.out.println("luas ruang : "+d.hitung_luas_ruang());
-        //System.out.println("bentuk ruang :" +d.hitung_bentuk_ruang());
-        System.out.println("jumlah kursi di dalam ruang : " + d.getJumlah_kursi());
-        // System.out.println("rasio luas ruang :" +d.hitung_rasio_luas());
-        System.out.println("jumlah pintu : " + d.getJumlah_pintu());
-        System.out.println("jumlah jendela :" + d.getJumlah_jendela());
-        //System.out.println("analisis pintu dan jendela : "+this.analisis_pintu_dan_jendela());
-//            System.out.println("jumlah steker : "+super.getJumlah_steker());
-//            System.out.println("kondisi steker "+super.getKondisi_steker());
-//            System.out.println("posisi steker :"+super.getPosisi_steker());
-//            System.out.println("analisis kelistrikan "+ this.analisis_kelistrikan());
-//            System.out.println("jumlah kabel LCD : "+super.getJumlah_kabel_LCD());
-//            System.out.println("kondisi kabel LCD : "+super.getKondisi_kabel_LCD());
-//            System.out.println("posisi kabel LCD : "+super.getPosisi_kabel_LCD());
-//            System.out.println("analisis kabel LCD : "+this.analisis_LCD());
-//            System.out.println("jumlah lampu dalam ruang : "+ super.getJumlah_lampu());
-//            System.out.println("kondisi lampu dalam ruang : "+super.getKondisi_lampu());
-//            System.out.println("posisi lampu dalam ruang: "+super.getKondisi_lampu());
-//            System.out.println("analisis lampu : "+this.analisis_lampu());
-//            System.out.println("jumlah kipas angin : "+super.getJumlah_kipas_angin());
-//            System.out.println("kondisi kipas angin :"+ super.getKondisi_kipas_angin());
-//            System.out.println("posisi kipas angin dalam ruang : " +super.getKondisi_kipas_angin());
-//            System.out.println("analisis kipas angin :"+this.analisis_kipas_angin());
-//            System.out.println("jumlah AC dalam ruangan : "+super.getJumlah_AC());
-//            System.out.println("kondisi AC dalam ruangan:  "+super.getKondisi_AC());
-//            System.out.println("posisi AC dalam ruangan : "+super.getPosisi_AC());
-//            System.out.println("analisis AC dalam ruang : "+ this.analisis_AC());
-//            System.out.println("inputan SSID : "+super.getSSID());
-//            System.out.println("inputan bandwidth :"+super.getBandwidth());
-//            System.out.println("analisis internet : "+this.analisis_internet());
-    }
+//    public void tampil() {
+//        System.out.println("ruang : " + d.getNama_ruang());
+//        System.out.println("lokasi : " + d.getLokasi_ruang());
+//        System.out.println("fakultas : " + d.getFakultas());
+//            //System.out.println("panjang ruang :"+getPanjang_ruang());
+//        //System.out.println("lebar ruang :"+d.getLebar_ruang());
+//        //System.out.println("luas ruang : "+d.hitung_luas_ruang());
+//        //System.out.println("bentuk ruang :" +d.hitung_bentuk_ruang());
+//        System.out.println("jumlah kursi di dalam ruang : " + d.getJumlah_kursi());
+//        // System.out.println("rasio luas ruang :" +d.hitung_rasio_luas());
+//        System.out.println("jumlah pintu : " + d.getJumlah_pintu());
+//        System.out.println("jumlah jendela :" + d.getJumlah_jendela());
+//        //System.out.println("analisis pintu dan jendela : "+this.analisis_pintu_dan_jendela());
+////            System.out.println("jumlah steker : "+super.getJumlah_steker());
+////            System.out.println("kondisi steker "+super.getKondisi_steker());
+////            System.out.println("posisi steker :"+super.getPosisi_steker());
+////            System.out.println("analisis kelistrikan "+ this.analisis_kelistrikan());
+////            System.out.println("jumlah kabel LCD : "+super.getJumlah_kabel_LCD());
+////            System.out.println("kondisi kabel LCD : "+super.getKondisi_kabel_LCD());
+////            System.out.println("posisi kabel LCD : "+super.getPosisi_kabel_LCD());
+////            System.out.println("analisis kabel LCD : "+this.analisis_LCD());
+////            System.out.println("jumlah lampu dalam ruang : "+ super.getJumlah_lampu());
+////            System.out.println("kondisi lampu dalam ruang : "+super.getKondisi_lampu());
+////            System.out.println("posisi lampu dalam ruang: "+super.getKondisi_lampu());
+////            System.out.println("analisis lampu : "+this.analisis_lampu());
+////            System.out.println("jumlah kipas angin : "+super.getJumlah_kipas_angin());
+////            System.out.println("kondisi kipas angin :"+ super.getKondisi_kipas_angin());
+////            System.out.println("posisi kipas angin dalam ruang : " +super.getKondisi_kipas_angin());
+////            System.out.println("analisis kipas angin :"+this.analisis_kipas_angin());
+////            System.out.println("jumlah AC dalam ruangan : "+super.getJumlah_AC());
+////            System.out.println("kondisi AC dalam ruangan:  "+super.getKondisi_AC());
+////            System.out.println("posisi AC dalam ruangan : "+super.getPosisi_AC());
+////            System.out.println("analisis AC dalam ruang : "+ this.analisis_AC());
+////            System.out.println("inputan SSID : "+super.getSSID());
+////            System.out.println("inputan bandwidth :"+super.getBandwidth());
+////            System.out.println("analisis internet : "+this.analisis_internet());
+//    }
 
     public ruang getruang() {
         return d;
@@ -333,7 +346,32 @@ public class in_out extends induk implements interfa {
     }
 
     @Override
-    public void input_identitas_kelas() {
+    void persentasekondisiruang() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void persentasekondisisarana() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void persentasekondisilingkungan() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void persentasekondisikebersihan() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void persentasekenyamanan() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void persentasekeamanan() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

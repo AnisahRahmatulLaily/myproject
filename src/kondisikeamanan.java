@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,14 +35,16 @@ public class kondisikeamanan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        cbkokoh = new javax.swing.JCheckBox();
+        cbtkokoh = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        cbada = new javax.swing.JCheckBox();
+        cbtada = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        cbaman = new javax.swing.JCheckBox();
+        cbtaman = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,26 +52,50 @@ public class kondisikeamanan extends javax.swing.JFrame {
 
         jLabel2.setText("Apakah Bangunan Anda Masih Kokoh ??");
 
-        jCheckBox1.setText("Kokoh");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbkokoh.setText("Kokoh");
+        cbkokoh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cbkokohActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Tidak Kokoh");
+        cbtkokoh.setText("Rapuh");
+        cbtkokoh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbtkokohActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Apakah Ada Kunci Pintu Dan Jendala ??");
 
-        jCheckBox3.setText("Ada");
+        cbada.setText("Ada");
+        cbada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbadaActionPerformed(evt);
+            }
+        });
 
-        jCheckBox4.setText("Tidak Ada");
+        cbtada.setText("Kosong");
+        cbtada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbtadaActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Apakah Ruangan Aman ??");
 
-        jCheckBox5.setText("Aman");
+        cbaman.setText("Aman");
 
-        jCheckBox6.setText("Berbahaya");
+        cbtaman.setText("Berbahaya");
+
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Back");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,57 +106,59 @@ public class kondisikeamanan extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(104, 104, 104)
-                            .addComponent(jLabel2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(94, 94, 94)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jCheckBox1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCheckBox2))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jCheckBox3))
-                                        .addComponent(jCheckBox5))
-                                    .addGap(0, 0, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox4)
-                                .addComponent(jCheckBox6)))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addGap(215, 215, 215)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbtada)
+                            .addComponent(cbtaman)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbkokoh)
+                                .addGap(66, 66, 66)
+                                .addComponent(cbtkokoh))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(cbaman)
+                            .addComponent(cbada)
+                            .addComponent(jLabel3))))
+                .addContainerGap(108, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
+                    .addComponent(cbkokoh)
+                    .addComponent(cbtkokoh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4))
+                    .addComponent(cbada)
+                    .addComponent(cbtada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(cbaman)
+                    .addComponent(cbtaman))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,9 +175,51 @@ public class kondisikeamanan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void cbkokohActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbkokohActionPerformed
+     cbtkokoh.setSelected(false);
+    }//GEN-LAST:event_cbkokohActionPerformed
+
+    private void cbtkokohActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbtkokohActionPerformed
+    cbkokoh.setSelected(false);
+    }//GEN-LAST:event_cbtkokohActionPerformed
+
+    private void cbadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbadaActionPerformed
+    cbtada.setSelected(false);
+    }//GEN-LAST:event_cbadaActionPerformed
+
+    private void cbtadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbtadaActionPerformed
+    cbada.setSelected(false);
+    }//GEN-LAST:event_cbtadaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String kokoh="";
+        String pintujendela="";
+        String keamanan="";
+        if(cbkokoh.isSelected())
+            kokoh+="Kokoh";
+        if(cbtkokoh.isSelected())
+            kokoh+="Rapuh";
+        if(cbada.isSelected())
+            pintujendela+="Ada";
+        if(cbtada.isSelected())
+            pintujendela+="Kosong";
+        if(cbaman.isSelected())
+            keamanan+="Aman";
+        if(cbtaman.isSelected())
+            keamanan+="Bahaya";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost/myproject","root","");
+            Statement statement=connection.createStatement();
+            String sql = "insert into keamanan values('"+kokoh+"','"+pintujendela+"','"+keamanan+"')";
+            statement.executeUpdate(sql);
+            statement.close();
+            JOptionPane.showMessageDialog(null, "tersimpan");
+       
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "salah"+e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,12 +257,14 @@ public class kondisikeamanan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox cbada;
+    private javax.swing.JCheckBox cbaman;
+    private javax.swing.JCheckBox cbkokoh;
+    private javax.swing.JCheckBox cbtada;
+    private javax.swing.JCheckBox cbtaman;
+    private javax.swing.JCheckBox cbtkokoh;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

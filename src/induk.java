@@ -1,8 +1,23 @@
+
 import java.util.Scanner;
 
-public abstract class induk  {
+public abstract class induk {
 //    Scanner in = new Scanner(System.in);
- public void input_identitas_ruang_kelas(){}
+
+    public void input_identitas_ruang_kelas() {
+    }
+
+    abstract void persentasekondisiruang();
+
+    abstract void persentasekondisisarana();
+
+    abstract void persentasekondisilingkungan();
+
+    abstract void persentasekondisikebersihan();
+
+    abstract void persentasekenyamanan();
+
+    abstract void persentasekeamanan();
  //public void proses (){}
  
 //		System.out.println("input ruang kelas");
