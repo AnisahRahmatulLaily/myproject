@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -129,7 +135,6 @@ public class kondisikenyamanan extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addGap(12, 12, 12)))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbtaus)
                             .addComponent(cbtbising)
@@ -175,6 +180,11 @@ public class kondisikenyamanan extends javax.swing.JFrame {
         );
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Reset");
 
@@ -192,9 +202,8 @@ public class kondisikenyamanan extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -228,6 +237,46 @@ public class kondisikenyamanan extends javax.swing.JFrame {
     private void cbtbocorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbtbocorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbtbocorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String kebisingan ="";
+        String bau="";
+        String kebocoran="";
+        String kerusakan = "";
+        String keausan="";
+        if(cbbising.isSelected())
+            kebisingan+="Bising";
+        if(cbtbising.isSelected())
+            kebisingan+="Tidak Bising";
+        if(cbya.isSelected())
+            bau+="Bau";
+        if(cbtidak.isSelected())
+            bau+="Tidak Bau";
+        if(cbbocor.isSelected())
+            kebocoran+="Bocor";
+        if(cbtbocor.isSelected())
+            kebocoran+="Tidak Bocor";
+        if(cbrusak.isSelected())
+            kerusakan+="Rusak";
+        if(cbbaik.isSelected())
+            kerusakan+="Baik";
+        if(cbaus.isSelected())
+            keausan+="Aus";
+        if(cbtaus.isSelected())
+            keausan+="Tidak Aus";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost/myproject","root","");
+            Statement statement=connection.createStatement();
+            String sql = "insert into keamanan values('"+kebisingan+"','"+bau+"','"+kebocoran+"','"+kerusakan+"','"+keausan+"')";
+            statement.executeUpdate(sql);
+            statement.close();
+            JOptionPane.showMessageDialog(null, "tersimpan");
+       
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "salah"+e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

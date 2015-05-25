@@ -10,7 +10,7 @@ public class in_out extends induk implements interfa {
     ruang f;
    // control j = new  control();
     // control a= new control();
-    int i, r, LCD = 0, AC = 0, lampu = 0, kipas = 0, steker = 0, CCTV = 0;
+    //int i, r, LCD = 0, AC = 0, lampu = 0, kipas = 0, steker = 0, CCTV = 0;
 
     //super_tb a;
     
