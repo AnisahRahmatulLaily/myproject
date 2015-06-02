@@ -1,3 +1,5 @@
+package ruang;
+
 
 
 //import coba_tb.ruangkelas;

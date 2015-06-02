@@ -1,10 +1,14 @@
+package ruang;
+
 
 import java.util.Scanner;
 
-public class control extends induk {
+public abstract class  control {
 
-    ruang ru = new ruang();
-    in_out io = new in_out();
+    
+    //in_out io =new in_out() {};
+    //in_out io = new in_out();
+    ruang ru= new ruang();
     Scanner in = new Scanner(System.in);
     int sesuai =0, tidaksesuai=0, hasil;
     //String  hasil;
@@ -70,14 +74,14 @@ public class control extends induk {
 //        } else {
 //            hasil = 1;
 //        }
-        io.output(ru.getPanjang_ruang(), ru.getLebar_ruang(), ru.getJumlah_kursi(), ru.getJumlah_pintu(), ru.getJumlah_jendela());
+        //io.output(ru.getPanjang_ruang(), ru.getLebar_ruang(), ru.getJumlah_kursi(), ru.getJumlah_pintu(), ru.getJumlah_jendela());
         return sesuai;
     }
-    @Override
-    void persentasekondisiruang(){
-       int persen = sesuai*25;
-        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
-    }
+//    @Override
+//    void persentasekondisiruang(){
+//       int persen = sesuai*25;
+//        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
+//    }
 
     int kondisi_sarana() {
         if (ru.getJumlah_steker() >= 4) {
@@ -215,11 +219,11 @@ public class control extends induk {
         }
         return sesuai;
     }
-    @Override
-    void persentasekondisisarana(){
-    int persen = sesuai*5;
-        System.out.println("persentase keseuaian kondisi sarana "+persen+"%");
-    }
+//    @Override
+//    void persentasekondisisarana(){
+//    int persen = sesuai*5;
+//        System.out.println("persentase keseuaian kondisi sarana "+persen+"%");
+//    }
     int kondisi_kebersihan(){
         if (ru.getKondisi_lantai().equalsIgnoreCase("bersih")){
             System.out.println("sesuai");
@@ -263,11 +267,11 @@ public class control extends induk {
 //        }
         return sesuai;
     }
-    @Override
-    void persentasekondisikebersihan(){
-       int persen = sesuai*20;
-        System.out.println("persentase keseuaian kondisi lingkungan "+persen+"%");
-    }
+//    @Override
+//    void persentasekondisikebersihan(){
+//       int persen = sesuai*20;
+//        System.out.println("persentase keseuaian kondisi lingkungan "+persen+"%");
+//    }
     int analisis_lingkungan(){
         if (ru.getSirkulasi_udara().equalsIgnoreCase("lancar")){
             System.out.println("sesuai");
@@ -304,11 +308,11 @@ public class control extends induk {
         }
         return hasil;
     }
-    @Override
-    void persentasekondisilingkungan(){
-       int persen = sesuai*25;
-        System.out.println("persentase keseuaian kondisi lingkungan "+persen+"%");
-    }
+//    @Override
+//    void persentasekondisilingkungan(){
+//       int persen = sesuai*25;
+//        System.out.println("persentase keseuaian kondisi lingkungan "+persen+"%");
+//    }
     int analisis_kenyamanan(){
        if (ru.getKebisingan().equalsIgnoreCase("bising")){
            System.out.println("tidak sesuai");
@@ -352,11 +356,11 @@ public class control extends induk {
        }
       return hasil;
     }
-    @Override
-    void persentasekenyamanan(){
-       int persen = sesuai*20;
-        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
-    }
+//    @Override
+//    void persentasekenyamanan(){
+//       int persen = sesuai*20;
+//        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
+//    }
     int analisis_keamanan(){
         if (ru.getKekokohan().equalsIgnoreCase("kokoh")){
             System.out.println("sesuai");
@@ -392,10 +396,10 @@ public class control extends induk {
         }
         return hasil;
     }
-    @Override
-    void persentasekeamanan(){
-       int persen = (int) (sesuai*33.333333);
-        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
-    }
+//    @Override
+//    void persentasekeamanan(){
+//       int persen = (int) (sesuai*33.333333);
+//        System.out.println("persentase keseuaian kondisi ruangan "+persen+"%");
+//    }
 
 }

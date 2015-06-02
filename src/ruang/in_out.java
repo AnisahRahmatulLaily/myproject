@@ -1,11 +1,13 @@
+package ruang;
+
  
 import java.util.Scanner;
 import javax.swing.JTextField;
 
-public class in_out extends induk implements interfa {
+public abstract class in_out extends induk implements interfa {
 
     Scanner in = new Scanner(System.in);
-    control c = new control();
+    //control c = new control();
     ruang d = new ruang();
     ruang f;
    // control j = new  control();
@@ -14,16 +16,16 @@ public class in_out extends induk implements interfa {
 
     //super_tb a;
     
-    public in_out(JTextField nama,JTextField lokasi, JTextField kelas) {
+    public in_out(JTextField txtnama,JTextField txtlokasi, JTextField txtkelas) {
 //        System.out.println("input ruang kelas");
-        d.setNama_ruang(nama.getText());
+        d.setNama_ruang(txtnama.getText());
 //        System.out.println("input lokasi ruang kelas");
-        d.setLokasi_ruang(lokasi.getText());
+        d.setLokasi_ruang(txtlokasi.getText());
 //        System.out.println("pilih fakultas");
-        d.setFakultas(kelas.getText());
+        d.setFakultas(txtkelas.getText());
         f = new ruang(d.getNama_ruang(), d.getLokasi_ruang(), d.getFakultas());
     }
-    public in_out(){
+    public in_out(JTextField panjang,JTextField lebar,JTextField kursi,JTextField pintu,JTextField jendela){
         
     }
     @Override
@@ -44,7 +46,6 @@ public class in_out extends induk implements interfa {
     public void input_kondisi_ruang_kelas() {
         System.out.println("masukan panjang");
         d.setPanjang_ruang(in.nextInt());
-        c.hitung_luas_ruang();
         System.out.println("masukan lebar");
         d.setLebar_ruang(in.nextInt());
         System.out.println("masukan jumlah kursi");
@@ -268,111 +269,112 @@ public class in_out extends induk implements interfa {
     }
 
     
-    @Override
-    public void output(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela) {
-        System.out.println("=== KONDISI RUANG KELAS ===");
-        System.out.println("Panjang Ruang : "+panjang_ruang);
-        System.out.println("Lebar Ruang : "+lebar_ruang);
-        System.out.println("Jumlah Kursi : "+jumlah_kursi);
-        System.out.println("Jumlah Pintu : "+jumlah_pintu);
-        System.out.println("Jumlah Jendela : "+jumlah_jendela);
-    }
-
-    @Override
-    public void output(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD,
-            String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu, String kondisi_lampu, 
-            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin, 
-            int jumlah_AC, String kondisi_AC, String posisi_AC, String SSID, String bandwidth, int jumlah_CCTV, 
-            String kondisi_CCTV, String posisi_CCTV) {
-        System.out.println("=== KONDISI SARANA ===");
-        System.out.println("Jumlah Steker : "+jumlah_steker);
-        System.out.println("Kondisi Steker : "+kondisi_steker);
-        System.out.println("Posisi Steker : "+posisi_steker);
-        System.out.println("Jumlah Kabel LCD : "+jumlah_kabel_LCD);
-        System.out.println("Kondisi Kabel LCD :"+kondisi_kabel_LCD);
-        System.out.println("Posisi Kabel LCD :"+posisi_kabel_LCD);
-        System.out.println("Jumlah Lampu :"+jumlah_lampu);
-        System.out.println("Kondisi Lampu :"+kondisi_lampu);
-        System.out.println("Posisi Lampu :"+posisi_lampu);
-        System.out.println("Jumlah Kipas Angin :"+jumlah_kipas_angin);
-        System.out.println("Kondisi Kipas Angin :"+kondisi_kipas_angin);
-        System.out.println("Posisi Kipas Angin :"+posisi_kipas_angin);
-        System.out.println("Jumlah AC :"+jumlah_AC);
-        System.out.println("Kondisi AC :"+kondisi_AC);
-        System.out.println("Posisi AC :"+posisi_AC);
-        System.out.println("SSID : "+SSID);
-        System.out.println("Bandwidth :"+bandwidth);
-        System.out.println("jumlah CCTV :"+jumlah_CCTV);
-        System.out.println("Kondisi CCTV : "+kondisi_CCTV);
-        System.out.println("Posisi CCTV : "+posisi_CCTV);
-        
-    }
-
-    @Override
-    public void output(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela) {
-        System.out.println("===KONDISI===");
-        System.out.println("Kondisi Lantai : "+kondisi_lantai);
-        System.out.println("Kondisi Dinding :"+kondisi_dinding);
-        System.out.println("Kondisi Atap :"+kondisi_atap);
-        System.out.println("Kondisi Pintu :"+kondisi_pintu);
-        System.out.println("Kondisi Jendela :"+kondisi_jendela);
-    }
-
-    @Override
-    public void output(String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu) {
-        System.out.println("===KONDISI===");
-        System.out.println("Sirkulasi Udara :"+sirkulasi_udara);
-        System.out.println("Pencahayaan :"+pencahayaan);
-        System.out.println("Pencahayaan :"+kelembapan);
-        System.out.println("Suhu :"+suhu);
-    }
-
-    @Override
-    public void output(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan) {
-        System.out.println("===KONDISI===");
-        System.out.println("Kebisingan :"+kebisingan);
-        System.out.println("Bau :"+bau);
-        System.out.println("kebocoran :"+kebocoran);
-        System.out.println("Kerusakan :"+kerusakan);
-        System.out.println("Keausan :"+keausan);
-    }
-
-    @Override
-    public void output(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya) {
-        System.out.println("===KONDISI===");
-        System.out.println("Kekokohan :"+kekokohan);
-        System.out.println("Jumlah Kunci :"+jumlah_kunci);
-        System.out.println("Bahaya :"+bahaya);
-    }
-
-    @Override
-    void persentasekondisiruang() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void persentasekondisisarana() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void persentasekondisilingkungan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void persentasekondisikebersihan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void persentasekenyamanan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void persentasekeamanan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+//    @Override
+//    public void output(int panjang_ruang, int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela) {
+//        System.out.println("=== KONDISI RUANG KELAS ===");
+//        System.out.println("Panjang Ruang : "+panjang_ruang);
+//        System.out.println("Lebar Ruang : "+lebar_ruang);
+//        System.out.println("Jumlah Kursi : "+jumlah_kursi);
+//        System.out.println("Jumlah Pintu : "+jumlah_pintu);
+//        System.out.println("Jumlah Jendela : "+jumlah_jendela);
+//    }
+//
+//    @Override
+//    public void output(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD,
+//            String kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu, String kondisi_lampu, 
+//            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin, 
+//            int jumlah_AC, String kondisi_AC, String posisi_AC, String SSID, String bandwidth, int jumlah_CCTV, 
+//            String kondisi_CCTV, String posisi_CCTV) {
+//        System.out.println("=== KONDISI SARANA ===");
+//        System.out.println("Jumlah Steker : "+jumlah_steker);
+//        System.out.println("Kondisi Steker : "+kondisi_steker);
+//        System.out.println("Posisi Steker : "+posisi_steker);
+//        System.out.println("Jumlah Kabel LCD : "+jumlah_kabel_LCD);
+//        System.out.println("Kondisi Kabel LCD :"+kondisi_kabel_LCD);
+//        System.out.println("Posisi Kabel LCD :"+posisi_kabel_LCD);
+//        System.out.println("Jumlah Lampu :"+jumlah_lampu);
+//        System.out.println("Kondisi Lampu :"+kondisi_lampu);
+//        System.out.println("Posisi Lampu :"+posisi_lampu);
+//        System.out.println("Jumlah Kipas Angin :"+jumlah_kipas_angin);
+//        System.out.println("Kondisi Kipas Angin :"+kondisi_kipas_angin);
+//        System.out.println("Posisi Kipas Angin :"+posisi_kipas_angin);
+//        System.out.println("Jumlah AC :"+jumlah_AC);
+//        System.out.println("Kondisi AC :"+kondisi_AC);
+//        System.out.println("Posisi AC :"+posisi_AC);
+//        System.out.println("SSID : "+SSID);
+//        System.out.println("Bandwidth :"+bandwidth);
+//        System.out.println("jumlah CCTV :"+jumlah_CCTV);
+//        System.out.println("Kondisi CCTV : "+kondisi_CCTV);
+//        System.out.println("Posisi CCTV : "+posisi_CCTV);
+//        
+//    }
+//
+//    @Override
+//    public void output(String kondisi_lantai, String kondisi_dinding, String kondisi_atap, String kondisi_pintu, String kondisi_jendela) {
+//        System.out.println("===KONDISI===");
+//        System.out.println("Kondisi Lantai : "+kondisi_lantai);
+//        System.out.println("Kondisi Dinding :"+kondisi_dinding);
+//        System.out.println("Kondisi Atap :"+kondisi_atap);
+//        System.out.println("Kondisi Pintu :"+kondisi_pintu);
+//        System.out.println("Kondisi Jendela :"+kondisi_jendela);
+//    }
+//
+//    @Override
+//    public void output(String sirkulasi_udara, int pencahayaan, int kelembapan, int suhu) {
+//        System.out.println("===KONDISI===");
+//        System.out.println("Sirkulasi Udara :"+sirkulasi_udara);
+//        System.out.println("Pencahayaan :"+pencahayaan);
+//        System.out.println("Pencahayaan :"+kelembapan);
+//        System.out.println("Suhu :"+suhu);
+//    }
+//
+//    @Override
+//    public void output(int kebisingan, String bau, String kebocoran, String kerusakan, String keausan) {
+//        System.out.println("===KONDISI===");
+//        System.out.println("Kebisingan :"+kebisingan);
+//        System.out.println("Bau :"+bau);
+//        System.out.println("kebocoran :"+kebocoran);
+//        System.out.println("Kerusakan :"+kerusakan);
+//        System.out.println("Keausan :"+keausan);
+//    }
+//
+//    @Override
+//    public void output(String kekokohan, int jumlah_kunci, int jumlah_jendela, String bahaya) {
+//        System.out.println("===KONDISI===");
+//        System.out.println("Kekokohan :"+kekokohan);
+//        System.out.println("Jumlah Kunci :"+jumlah_kunci);
+//        System.out.println("Bahaya :"+bahaya);
+//    }
+//
+//    @Override
+//    void persentasekondisiruang() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    void persentasekondisisarana() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    void persentasekondisilingkungan() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    void persentasekondisikebersihan() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    void persentasekenyamanan() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    void persentasekeamanan() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+public in_out(){
+}
 }

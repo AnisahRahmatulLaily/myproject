@@ -1,3 +1,5 @@
+package ruang;
+
 
 import java.util.Set;
 
@@ -497,4 +499,8 @@ public class ruang {
     public ruang(){
     }
     //public void  input_identitas_ruang_kelas();
+
+    String setFakultas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -1,3 +1,5 @@
+package ruang;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,10 +17,8 @@ import javax.swing.JOptionPane;
  * @author TOSHIBA
  */
 public class kondisikeamanan extends javax.swing.JFrame {
-
-    /**
-     * Creates new form kondisikeamanan
-     */
+ruang d = new ruang();
+int sesuai =0, tidaksesuai=0, hasil;
     public kondisikeamanan() {
         initComponents();
     }

@@ -1,3 +1,5 @@
+package ruang;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -48,7 +50,7 @@ public class identitaskelas extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 204, 255));
         jLabel1.setText("Kondisi Kelas");
 
-        jLabel2.setText("Nama Mahasiswa : ");
+        jLabel2.setText("Ruang Kelas");
 
         jLabel3.setText("Lokasi");
 
@@ -63,6 +65,11 @@ public class identitaskelas extends javax.swing.JFrame {
         jButton2.setText("Reset");
 
         jButton3.setText("Next");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -90,15 +97,16 @@ public class identitaskelas extends javax.swing.JFrame {
                             .addComponent(fakultas, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(173, 173, 173)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(save)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(90, 90, 90)
-                        .addComponent(jButton3)))
-                .addGap(33, 33, 33))
+                        .addComponent(jLabel1)))
+                .addContainerGap(122, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(save)
+                .addGap(70, 70, 70)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,12 +125,12 @@ public class identitaskelas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(fakultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(save))
-                .addGap(53, 53, 53))
+                    .addComponent(jButton3))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,6 +165,13 @@ public class identitaskelas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "salah"+e);
         }
     }//GEN-LAST:event_saveActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//        in_out x = new in_out(nama,lokasi,fakultas);
+//        x.input_identitas_kelas();
+//        dispose();
+//        x.kondisi_dan_posisi_sarana();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
