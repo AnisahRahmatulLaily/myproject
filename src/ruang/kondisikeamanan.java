@@ -192,10 +192,12 @@ int sesuai =0, tidaksesuai=0, hasil;
     }//GEN-LAST:event_cbtadaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //ruang t=new ruang();
         String kokoh="";
         String pintujendela="";
         String keamanan="";
         if(cbkokoh.isSelected())
+           // t.setKekokohan("kokoh");
             kokoh+="Kokoh";
         if(cbtkokoh.isSelected())
             kokoh+="Rapuh";
