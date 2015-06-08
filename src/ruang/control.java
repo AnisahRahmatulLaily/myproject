@@ -34,6 +34,7 @@ public abstract class  control {
 
     public  void analisis_hitung_ruang (){
     }
+    
     double hitung_luas_ruang() {
         luas = ru.getPanjang_ruang() * ru.getLebar_ruang();
         return luas;
@@ -119,12 +120,12 @@ public abstract class  control {
             System.out.println("tidak sesuai");
             tidaksesuai++;
         }
-        if (ru.getPosisi_kabel_LCD().equalsIgnoreCase("dekatdosen")) {
-            System.out.println("sesuai");
-            sesuai++;
-        } else {
+        if (ru.getPosisi_kabel_LCD().equals("dekatdosen")) {
             System.out.println("tidak sesuai");
             tidaksesuai++;
+        } else {
+            System.out.println("sesuai");
+            sesuai++;
         }
         if (ru.getJumlah_lampu() >= 18) {
             System.out.println("sesuai");

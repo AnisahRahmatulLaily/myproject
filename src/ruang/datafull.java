@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ruang;
 import com.sun.org.apache.xml.internal.dtm.DTM;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,31 +31,20 @@ import ruang.ruang;
  * @author TOSHIBA
  */
 public class datafull extends javax.swing.JFrame {
+    private DefaultTableModel tabel;
 
     List<ruang> ab = new ArrayList<ruang>();
     int currentRow = 0;
-    int jumlahsteker = 0, jumlahlampu = 0, jumlahlcd = 0, jumlahkipas = 0, jumlahac = 0,jumlahcctv=0;
-    int stekerbaik = 0, lampubaik = 0, lcdbaik = 0, acbaik = 0, kipasbaik = 0,cctvbaik=0;
-    int posisisteker = 0, posisilampu = 0, posisilcd = 0, posisiac = 0, posisikipas = 0,posisicctv=0;
-    String login ="",lantai="",dinding="",atap="",pintu="",jendela="",kebisingan="",bau="",kebocoran="",kerusakan="",keausan="",kekokohan="",kuncijendela="",aman="";
+    String sirkulasi="",login ="",lantai="",dinding="",atap="",pintu="",jendela="",kebisingan="",bau="",kebocoran="",kerusakan="",keausan="",kekokohan="",kuncijendela="",aman="";
 
-    /**
-     * Creates new form datafull
-     */
+   
     public datafull() {
         initComponents();
-        //tampildata();
-        //init();
-        //ScrollDemo();
-        //run();
         slider1();
         loadData();
-        jumlah();
-        kondisibaik();
-        posisi();
+        tampilmodel();
         slider2();
         slider3();
-        //atur(tbldata, lebar);
         String lookAndFeel
                 = javax.swing.UIManager.getSystemLookAndFeelClassName();
         try {
@@ -104,6 +89,21 @@ public class datafull extends javax.swing.JFrame {
         }
         
     }
+    public void panel(){
+            kondisi.setVisible(false);
+            identitas.setVisible(false);
+            steker.setVisible(false);
+            lampu.setVisible(false);
+            ac.setVisible(false);
+            lcd.setVisible(false);
+            kipas.setVisible(false);
+            cctv.setVisible(false);
+            kebersihan.setVisible(false);
+            kenyamanan.setVisible(false);
+            ssid.setVisible(false);
+            keamanan.setVisible(false);
+            lingkungan.setVisible(false);
+    }
 public void slider1(){
                 p.setEditable(false);	
 	        p.setText(null);	
@@ -131,7 +131,7 @@ public void slider2(){
                 sldrkelembapan.addChangeListener (	
 	            new ChangeListener() {
 	                public void stateChanged (ChangeEvent e) {	
-	                    p.setText ( String.valueOf(sldrkelembapan.getValue()) );	
+	                    k.setText ( String.valueOf(sldrkelembapan.getValue()) );	
                         }	
 	            }
 	        );
@@ -147,105 +147,15 @@ public void slider3(){
                 sldrsuhu.addChangeListener (	
 	            new ChangeListener() {
 	                public void stateChanged (ChangeEvent e) {	
-	                    p.setText ( String.valueOf(sldrsuhu.getValue()) );	
+	                    s.setText ( String.valueOf(sldrsuhu.getValue()) );	
                         }	
 	            }
 	        );
     }
-    private void kondisibaik() {
-        if (cbstekerbaik.isSelected()) {
-            stekerbaik++;
-        } else if (cblcdbaik.isSelected()) {
-            lcdbaik++;
-        } else if (cbacbaik.isSelected()) {
-            acbaik++;
-        } else if (cbkipasbaik.isSelected()) {
-            kipasbaik++;
-        }else if(cbcctvbaik.isSelected()){
-            cctvbaik++;
-        }
-    }
-    private void jumlah() {
-        if (isCursorSet()) {
-            jumlahsteker++;
-            cbstekerbaik.setSelected(false);
-            cbstekerbelakang.setSelected(false);
-            cbstekerburuk.setSelected(false);
-            cbstekerdekatdosen.setSelected(false);
-            cbstekerdekatmahasiswa.setSelected(false);
-            cbstekerlainnya.setSelected(false);
-            cbstekerpojokruang.setSelected(false);
-            cbstekersamping.setSelected(false);
-        } else if (isCursorSet()) {
-            jumlahlcd++;
-            cblcdbaik.setSelected(false);
-            cblcddekatdosen.setSelected(false);
-            cblcdlainnya.setSelected(false);
-            cblcdrusak.setSelected(false);
-        }else if(isCursorSet()){
-            jumlahlampu++;
-            cblampuatap.setSelected(false);
-            cblampubaik.setSelected(false);
-            cblampulainny.setSelected(false);
-            cblampurusak.setSelected(false);
-        }else if(isCursorSet()){
-            jumlahkipas++;
-            cbkipasatap.setSelected(false);
-            cbkipasbaik.setSelected(false);
-            cbkipaslainnya.setSelected(false);
-            cbkipasrusa.setSelected(false);
-        }else if(isCursorSet()){
-            jumlahac++;
-            cbacbaik.setSelected(false);
-            cbacbelakang.setSelected(false);
-            cbaclainnya.setSelected(false);
-            cbacrusak.setSelected(false);
-            cbacsamping.setSelected(false);
-        }else if(isCursorSet()){
-            jumlahcctv++;
-            cbcctvbaik.setSelected(false);
-            cbcctvbelakang.setSelected(false);
-            cbcctvdepan.setSelected(false);
-            cbcctvlainnya.setSelected(false);
-            cbcctvrusak.setSelected(false);
-        }
-       
-    }
-
-    private void posisi() {
-        if (cbstekerbelakang.isSelected() 
-//                || cbstekerdekatdosen.isSelected() || cbstekerdekatmahasiswa.isSelected() || cbstekerpojokruang.isSelected() || cbstekersamping.isSelected()
-                ) {
-            posisisteker++;
-        }else if(cblcddekatdosen.isSelected()){
-            posisilcd++;
-        }else if(cblampuatap.isSelected()){
-            posisilampu++;
-            
-        }else if(cbcctvbelakang.isSelected()||cbcctvdepan.isSelected()){
-            posisicctv++;
-        }else if(cbacbelakang.isSelected()||cbacsamping.isSelected()){
-            posisiac++;
-        }else if (cbkipasatap.isSelected()){
-            posisikipas++;
-        }}
-//         private void run ()
-//            {
-//                JFrame frame = new JFrame("panel demo");
-//                frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
-//
-//                JPanel panel = new JPanel();
-//              data c = frame.getContentPane();
-//                panel.setSize(100,100);
-//                panel.setLayout(new GridLayout(1000,1));
-//                for(int i = 0; i<1000;i++)
-//                panel.add(new JLabel("JLabel "+i));
-//
-//                JScrollPane jsp = new JScrollPane(panel);
-//                c.add(jsp);
-//                frame.setSize(100,100);
-//                frame.setVisible(true);
-//            }
+public void input(){
+    ruang m = new ruang();
+                
+}
     private void tampilkandata() {
         DefaultTableModel tabel = new DefaultTableModel();
         tabel.addColumn("nama");
@@ -281,12 +191,11 @@ public void slider3(){
         tabel.addColumn("kondisi atap");
         tabel.addColumn("kondisi pintu");
         tabel.addColumn("kondisi jendela");
-//        tabel.addColumn("sirkulasi");
-//        tabel.addColumn("pencahayaan");
-//        tabel.addColumn("kelembapan");
-//        tabel.addColumn("suhu");
+        tabel.addColumn("sirkulasi");
+        tabel.addColumn("pencahayaan");
+        tabel.addColumn("kelembapan");
+        tabel.addColumn("suhu");
         tabel.addColumn("kebisingan");
-        //tabel.addColumn("sirkulasi");
         tabel.addColumn("bau");
         tabel.addColumn("kebocoran");
         tabel.addColumn("kerusakan");
@@ -309,7 +218,7 @@ public void slider3(){
                     res.getString(24), res.getString(25), res.getString(26), res.getString(27),
                     res.getString(28), res.getString(29), res.getString(30),res.getString(31), res.getString(32), res.getString(33),
                     res.getString(34), res.getString(35), res.getString(36), res.getString(37),
-                    res.getString(38), res.getString(39), res.getString(40),res.getString(41)});
+                    res.getString(38), res.getString(39), res.getString(40),res.getString(41),res.getString(42), res.getString(43), res.getString(44),res.getString(45)});
             }
             tbldata.setModel(tabel);
         } catch (Exception e) {
@@ -343,50 +252,45 @@ public void slider3(){
             txtjmlkursi.setText("");
             txtjmlpintu.setText("");
             txtjmljendela.setText("");
+        }                                                                                                                                                                                               
+    }
+     private void atur(JTable lihat, int lebar[]) {
+        try {
+            lihat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            int banyak = lihat.getColumnCount();
+            for (int i = 0; i < banyak; i++) {
+                TableColumn kolom = lihat.getColumnModel().getColumn(i);
+                kolom.setPreferredWidth(lebar[i]);
+                lihat.setRowHeight(20);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "salah" + e);
         }
     }
-//    private void atur(JTable lihat, int lebar[]){
-//        try{
-//            lihat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//            int banyak=lihat.getColumnCount();
-//            for(int i=0;i<banyak;i++){
-//                TableColumn kolom = lihat.getColumnModel().getColumn(i);
-//                kolom.setPreferredWidth(lebar[i]);
-//                lihat.setRowHeight(20);
-//                
-//            }
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, "Salah"+e);
-//        }
-//    }
-//    private void tampildata(){
-//        try{
-//            String [] kolom={"nama","lokasi","fakultas","panjang","lebar","jumlah kursi","jumlah pintu","jumlah jendela",
-//                "jumlah steker","kondisi steker","posisi steker","jumlah lcd","kondisi lcd","posisi lcd","jumlah lampu",
-//                "kondisi lampu","posisi lampu","jumlah kipas","kondisi kipas","posisi kipas","jumlah ac","kondisi ac",
-//                "posisi ac","ssid","login","jumlah cctv","kondisi cctv","posisi cctv","kondisi lantai","kondisi dinding",
-//                "kondisi atap","kondisi pintu","kondisi jendela","kebisingan","bau","kebocoran","kerusakan","keausan",
-//                "kekokohan","kunci & jendela","bahaya"};
-//            DefaultTableModel dtm = new DefaultTableModel(null,kolom){
-//                @Override
-//                public boolean isCellEdittable(int rowIndex, int columnIndex){
-//                    return false;
-//                }
-//            };
-//            tbldata.setModel(dtm);
-//            atur(tbldata,new int[]{100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-//                                   100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100});
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, "saalah"+e);
-//        }
-//    }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+    //untuk membuat void colom yang sesuai kita inginkan
+    private void tampilmodel() {
+        try {
+            String[] kolom = {"nama","lokasi","fakultas","panjang","lebar","jumlah kursi","jumlah pintu","jumlah jendela",
+                "jumlah steker","kondisi steker","posisi steker","jumlah lcd","kondisi lcd","posisi lcd","jumlah lampu",
+                "kondisi lampu","posisi lampu","jumlah kipas","kondisi kipas","posisi kipas","jumlah ac","kondisi ac",
+                "posisi ac","ssid","login","jumlah cctv","kondisi cctv","posisi cctv","kondisi lantai","kondisi dinding",
+                "kondisi atap","kondisi pintu","kondisi jendela","kebisingan","bau","kebocoran","kerusakan","keausan",
+                "kekokohan","kunci & jendela","bahaya"};
+            DefaultTableModel dtm = new DefaultTableModel(null, kolom) {
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+            };
+            
+            tbldata.setModel(dtm);
+            atur(tbldata, new int []{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100});
+            }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "salah" + e);
+        }
+    }
+    //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -417,7 +321,6 @@ public void slider3(){
         jScrollPane1 = new javax.swing.JScrollPane();
         tbldata = new javax.swing.JTable();
         btndelete = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         cari = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
@@ -429,8 +332,6 @@ public void slider3(){
         steker = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
-        cbstekerbaik = new javax.swing.JCheckBox();
-        cbstekerburuk = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         cbstekerdekatdosen = new javax.swing.JCheckBox();
         cbstekerpojokruang = new javax.swing.JCheckBox();
@@ -438,30 +339,40 @@ public void slider3(){
         cbstekerdekatmahasiswa = new javax.swing.JCheckBox();
         cbstekersamping = new javax.swing.JCheckBox();
         cbstekerlainnya = new javax.swing.JCheckBox();
+        txtkondisisteker = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtjumlahsteker = new javax.swing.JTextField();
+        txtposisisteker = new javax.swing.JTextField();
         lcd = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cblcdbaik = new javax.swing.JCheckBox();
-        cblcdrusak = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         cblcddekatdosen = new javax.swing.JCheckBox();
         cblcdlainnya = new javax.swing.JCheckBox();
+        jLabel21 = new javax.swing.JLabel();
+        txtjumlahlcd = new javax.swing.JTextField();
+        txtlcdkondisi = new javax.swing.JTextField();
+        txtposisilcd = new javax.swing.JTextField();
         lampu = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         cblampuatap = new javax.swing.JCheckBox();
         cblampulainny = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        cblampubaik = new javax.swing.JCheckBox();
-        cblampurusak = new javax.swing.JCheckBox();
+        jLabel22 = new javax.swing.JLabel();
+        txtkondisilampu = new javax.swing.JTextField();
+        txtjumlahlampu = new javax.swing.JTextField();
+        txtposisilampu = new javax.swing.JTextField();
         kipas = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         cbkipasatap = new javax.swing.JCheckBox();
         cbkipaslainnya = new javax.swing.JCheckBox();
-        cbkipasbaik = new javax.swing.JCheckBox();
-        cbkipasrusa = new javax.swing.JCheckBox();
+        jLabel55 = new javax.swing.JLabel();
+        txtjumlahkipas = new javax.swing.JTextField();
+        txtkondisikipas = new javax.swing.JTextField();
+        txtposisikipas = new javax.swing.JTextField();
         ac = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -469,14 +380,17 @@ public void slider3(){
         cbacbelakang = new javax.swing.JCheckBox();
         cbacsamping = new javax.swing.JCheckBox();
         cbaclainnya = new javax.swing.JCheckBox();
-        cbacbaik = new javax.swing.JCheckBox();
-        cbacrusak = new javax.swing.JCheckBox();
+        jLabel56 = new javax.swing.JLabel();
+        txtjumlahac = new javax.swing.JTextField();
+        txtkondisiAC = new javax.swing.JTextField();
+        txtposisiac = new javax.swing.JTextField();
         ssid = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         cbssidya = new javax.swing.JCheckBox();
         cbssidtidak = new javax.swing.JCheckBox();
         cmbssid = new javax.swing.JComboBox();
+        txtlogin = new javax.swing.JTextField();
         cctv = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -484,8 +398,10 @@ public void slider3(){
         cbcctvdepan = new javax.swing.JCheckBox();
         cbcctvlainnya = new javax.swing.JCheckBox();
         cbcctvbelakang = new javax.swing.JCheckBox();
-        cbcctvbaik = new javax.swing.JCheckBox();
-        cbcctvrusak = new javax.swing.JCheckBox();
+        jLabel57 = new javax.swing.JLabel();
+        txtjumlahcctv = new javax.swing.JTextField();
+        txtkondisicctv = new javax.swing.JTextField();
+        txtposisicctv = new javax.swing.JTextField();
         keamanan = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         cbkokoh = new javax.swing.JCheckBox();
@@ -499,8 +415,8 @@ public void slider3(){
         kebersihan = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
+        cblancar = new javax.swing.JCheckBox();
+        cbtidaklancar = new javax.swing.JCheckBox();
         jLabel40 = new javax.swing.JLabel();
         sldrpencahayaan = new javax.swing.JSlider();
         jLabel41 = new javax.swing.JLabel();
@@ -547,7 +463,6 @@ public void slider3(){
         btnnext = new javax.swing.JButton();
         btnprev = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -709,13 +624,13 @@ public void slider3(){
 
         tbldata.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "nama", "lokasi", "fakultas", "panjang", "lebar", "jumlah kursi", "jumlah pintu", "jumlah jendela", "jumlah steker", "kondisi baik", "posisi steker", "jumlah LCD", "kondisi LCD", "posisi LCD", "jumlah lampu", "kondisi lampu", "posisi lampu", "jumlah kipas", "kondisi kipas", "posisi kipas", "jumlah ac", "kondisi ac", "posisi ac", "ssid", "login", "jumlah cctv", "kondisi cctv", "posisi cctv", "kondisi lantai", "kondisi lantai", "kondisi atap", "kondisi pintu", "kondisi jendela", "kebisingan", "bau", "kebocoran", "kerusakan", "keausan", "kekokohan", "kunci & jendela", "bahaya"
+                "nama", "lokasi", "fakultas", "panjang", "lebar", "jumlah kursi", "jumlah pintu", "jumlah jendela", "jumlah steker", "kondisi baik", "posisi steker", "jumlah LCD", "kondisi LCD", "posisi LCD", "jumlah lampu", "kondisi lampu", "posisi lampu", "jumlah kipas", "kondisi kipas", "posisi kipas", "jumlah ac", "kondisi ac", "posisi ac", "ssid", "login", "jumlah cctv", "kondisi cctv", "posisi cctv", "kondisi lantai", "kondisi lantai", "kondisi atap", "kondisi pintu", "kondisi jendela", "sirkulasi", "pencahayaan", "kelembapan", "suhu", "kebisingan", "bau", "kebocoran", "kerusakan", "keausan", "kekokohan", "kunci & jendela", "bahaya"
             }
         ));
         jScrollPane1.setViewportView(tbldata);
@@ -724,12 +639,6 @@ public void slider3(){
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteActionPerformed(evt);
-            }
-        });
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -742,9 +651,7 @@ public void slider3(){
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(dataLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(181, 181, 181)
+                .addGap(353, 353, 353)
                 .addComponent(btndelete)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -754,9 +661,7 @@ public void slider3(){
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addGroup(dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btndelete)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btndelete)
                 .addContainerGap())
         );
 
@@ -822,18 +727,14 @@ public void slider3(){
 
         jLabel54.setText("Kondisi Steker");
 
-        cbstekerbaik.setText("Baik");
-        cbstekerbaik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbstekerbaikActionPerformed(evt);
-            }
-        });
-
-        cbstekerburuk.setText("Buruk");
-
         jLabel14.setText("Posisi Steker");
 
         cbstekerdekatdosen.setText("Dekat Dosen");
+        cbstekerdekatdosen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbstekerdekatdosenActionPerformed(evt);
+            }
+        });
 
         cbstekerpojokruang.setText("Pojok Ruang");
         cbstekerpojokruang.addActionListener(new java.awt.event.ActionListener() {
@@ -843,8 +744,18 @@ public void slider3(){
         });
 
         cbstekerbelakang.setText("Belakang");
+        cbstekerbelakang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbstekerbelakangActionPerformed(evt);
+            }
+        });
 
         cbstekerdekatmahasiswa.setText("Dekat Mahasiswa");
+        cbstekerdekatmahasiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbstekerdekatmahasiswaActionPerformed(evt);
+            }
+        });
 
         cbstekersamping.setText("Samping");
         cbstekersamping.addActionListener(new java.awt.event.ActionListener() {
@@ -854,6 +765,13 @@ public void slider3(){
         });
 
         cbstekerlainnya.setText("Lainnya");
+        cbstekerlainnya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbstekerlainnyaActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Jumlah Steker");
 
         javax.swing.GroupLayout stekerLayout = new javax.swing.GroupLayout(steker);
         steker.setLayout(stekerLayout);
@@ -866,7 +784,14 @@ public void slider3(){
                         .addGap(157, 157, 157)
                         .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel54)))
+                            .addGroup(stekerLayout.createSequentialGroup()
+                                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel54)
+                                    .addComponent(jLabel20))
+                                .addGap(63, 63, 63)
+                                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtkondisisteker)
+                                    .addComponent(txtjumlahsteker, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))))
                     .addGroup(stekerLayout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -876,41 +801,45 @@ public void slider3(){
                         .addGap(25, 25, 25)
                         .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbstekerlainnya)
-                            .addComponent(cbstekerdekatmahasiswa)
-                            .addComponent(cbstekerpojokruang))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stekerLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cbstekerbaik)
-                .addGap(44, 44, 44)
-                .addComponent(cbstekerburuk)
-                .addGap(170, 170, 170))
+                            .addGroup(stekerLayout.createSequentialGroup()
+                                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbstekerdekatmahasiswa)
+                                    .addComponent(cbstekerpojokruang))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtposisisteker)))))
+                .addGap(31, 31, 31))
         );
         stekerLayout.setVerticalGroup(
             stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stekerLayout.createSequentialGroup()
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel54)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(44, 44, 44)
                 .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbstekerbaik)
-                    .addComponent(cbstekerburuk))
+                    .addComponent(jLabel20)
+                    .addComponent(txtjumlahsteker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(txtkondisisteker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbstekerdekatdosen)
-                    .addComponent(cbstekerpojokruang))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbstekerbelakang)
-                    .addComponent(cbstekerdekatmahasiswa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stekerLayout.createSequentialGroup()
+                        .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbstekerdekatdosen)
+                            .addComponent(cbstekerpojokruang))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbstekerbelakang)
+                            .addComponent(cbstekerdekatmahasiswa)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stekerLayout.createSequentialGroup()
+                        .addComponent(txtposisisteker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)))
                 .addGroup(stekerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbstekersamping)
                     .addComponent(cbstekerlainnya))
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         jPanel1.add(steker, "card8");
@@ -919,22 +848,20 @@ public void slider3(){
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Analisis LCD");
 
-        jLabel15.setText("Kondisi LCD");
-
-        cblcdbaik.setText("Baik");
-
-        cblcdrusak.setText("Rusak");
-        cblcdrusak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cblcdrusakActionPerformed(evt);
-            }
-        });
+        jLabel15.setText("Kondisi Baik LCD");
 
         jLabel16.setText("Posisi LCD");
 
         cblcddekatdosen.setText("Dekat Dosen");
+        cblcddekatdosen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cblcddekatdosenActionPerformed(evt);
+            }
+        });
 
         cblcdlainnya.setText("Lainnya");
+
+        jLabel21.setText("Jumlah LCD");
 
         javax.swing.GroupLayout lcdLayout = new javax.swing.GroupLayout(lcd);
         lcd.setLayout(lcdLayout);
@@ -944,32 +871,45 @@ public void slider3(){
             .addGroup(lcdLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addGap(35, 35, 35)
-                .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cblcdbaik)
-                    .addComponent(cblcddekatdosen))
-                .addGap(33, 33, 33)
-                .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cblcdlainnya)
-                    .addComponent(cblcdrusak))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(lcdLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(73, 73, 73)
+                        .addComponent(txtjumlahlcd, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lcdLayout.createSequentialGroup()
+                        .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(lcdLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(cblcddekatdosen)
+                                .addGap(33, 33, 33)
+                                .addComponent(cblcdlainnya))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lcdLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtlcdkondisi, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(108, 108, 108)))
+                        .addComponent(txtposisilcd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         lcdLayout.setVerticalGroup(
             lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lcdLayout.createSequentialGroup()
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(52, 52, 52)
                 .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cblcdbaik)
-                    .addComponent(cblcdrusak)
-                    .addComponent(jLabel15))
-                .addGap(50, 50, 50)
+                    .addComponent(jLabel21)
+                    .addComponent(txtjumlahlcd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtlcdkondisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(lcdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(cblcddekatdosen)
-                    .addComponent(cblcdlainnya))
+                    .addComponent(cblcdlainnya)
+                    .addComponent(txtposisilcd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -978,6 +918,11 @@ public void slider3(){
         jLabel23.setText("Posisi");
 
         cblampuatap.setText("Atap Ruangan");
+        cblampuatap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cblampuatapActionPerformed(evt);
+            }
+        });
 
         cblampulainny.setText("Lainnya");
         cblampulainny.addActionListener(new java.awt.event.ActionListener() {
@@ -986,13 +931,13 @@ public void slider3(){
             }
         });
 
-        jLabel18.setText("jLabel18");
+        jLabel18.setFont(new java.awt.Font("Kristen ITC", 0, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Kondisi Lampu");
 
         jLabel19.setText("Kondisi");
 
-        cblampubaik.setText("Baik");
-
-        cblampurusak.setText("Rusak");
+        jLabel22.setText("Jumlah Lampu");
 
         javax.swing.GroupLayout lampuLayout = new javax.swing.GroupLayout(lampu);
         lampu.setLayout(lampuLayout);
@@ -1000,37 +945,44 @@ public void slider3(){
             lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(lampuLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel22))
+                .addGap(36, 36, 36)
                 .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lampuLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cblampubaik)
-                            .addComponent(cblampuatap))
-                        .addGap(33, 33, 33)
-                        .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cblampulainny)
-                            .addComponent(cblampurusak)))
+                        .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtkondisilampu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                            .addComponent(txtjumlahlampu, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(252, Short.MAX_VALUE))
                     .addGroup(lampuLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel23))))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addComponent(cblampuatap)
+                        .addGap(33, 33, 33)
+                        .addComponent(cblampulainny)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtposisilampu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))))
         );
         lampuLayout.setVerticalGroup(
             lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lampuLayout.createSequentialGroup()
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(48, 48, 48)
                 .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtjumlahlampu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel19)
-                    .addComponent(cblampubaik)
-                    .addComponent(cblampurusak))
-                .addGap(37, 37, 37)
+                    .addComponent(txtkondisilampu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(lampuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(cblampuatap)
-                    .addComponent(cblampulainny))
+                    .addComponent(cblampulainny)
+                    .addComponent(txtposisilampu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -1056,9 +1008,7 @@ public void slider3(){
             }
         });
 
-        cbkipasbaik.setText("Baik");
-
-        cbkipasrusa.setText("Rusak");
+        jLabel55.setText("Jumlah Kipas");
 
         javax.swing.GroupLayout kipasLayout = new javax.swing.GroupLayout(kipas);
         kipas.setLayout(kipasLayout);
@@ -1068,33 +1018,43 @@ public void slider3(){
             .addGroup(kipasLayout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
                     .addComponent(jLabel25)
-                    .addComponent(jLabel26))
-                .addGap(52, 52, 52)
+                    .addComponent(jLabel55))
                 .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbkipasatap)
-                    .addComponent(cbkipasbaik))
-                .addGap(46, 46, 46)
-                .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbkipasrusa)
-                    .addComponent(cbkipaslainnya))
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addGroup(kipasLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(cbkipasatap)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbkipaslainnya)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtposisikipas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kipasLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtjumlahkipas, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                            .addComponent(txtkondisikipas))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         kipasLayout.setVerticalGroup(
             kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kipasLayout.createSequentialGroup()
                 .addComponent(jLabel24)
-                .addGap(76, 76, 76)
+                .addGap(68, 68, 68)
+                .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(txtjumlahkipas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(cbkipasbaik)
-                    .addComponent(cbkipasrusa))
-                .addGap(33, 33, 33)
+                    .addComponent(txtkondisikipas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(kipasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(cbkipasatap)
-                    .addComponent(cbkipaslainnya))
-                .addContainerGap(87, Short.MAX_VALUE))
+                    .addComponent(cbkipaslainnya)
+                    .addComponent(txtposisikipas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jPanel1.add(kipas, "card11");
@@ -1120,52 +1080,69 @@ public void slider3(){
         });
 
         cbaclainnya.setText("Lainnya");
+        cbaclainnya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbaclainnyaActionPerformed(evt);
+            }
+        });
 
-        cbacbaik.setText("Baik");
-
-        cbacrusak.setText("Rusak");
+        jLabel56.setText("Jumlah AC");
 
         javax.swing.GroupLayout acLayout = new javax.swing.GroupLayout(ac);
         ac.setLayout(acLayout);
         acLayout.setHorizontalGroup(
             acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(acLayout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel28))
-                .addGap(29, 29, Short.MAX_VALUE)
-                .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbacbaik)
-                    .addComponent(cbacbelakang))
-                .addGap(36, 36, 36)
-                .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbacsamping)
-                    .addComponent(cbacrusak))
-                .addContainerGap(156, Short.MAX_VALUE))
             .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, acLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbaclainnya)
                 .addGap(210, 210, 210))
+            .addGroup(acLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(acLayout.createSequentialGroup()
+                        .addComponent(jLabel56)
+                        .addGap(35, 35, 35)
+                        .addComponent(txtjumlahac, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(acLayout.createSequentialGroup()
+                        .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel28))
+                        .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(acLayout.createSequentialGroup()
+                                .addGap(41, 56, Short.MAX_VALUE)
+                                .addComponent(cbacbelakang)
+                                .addGap(36, 36, 36)
+                                .addComponent(cbacsamping)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtposisiac, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(35, Short.MAX_VALUE))
+                            .addGroup(acLayout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(txtkondisiAC, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         acLayout.setVerticalGroup(
             acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(acLayout.createSequentialGroup()
                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(44, 44, 44)
+                .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(txtjumlahac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(cbacbaik)
-                    .addComponent(cbacrusak))
-                .addGap(36, 36, 36)
+                    .addComponent(txtkondisiAC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(acLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(cbacbelakang)
-                    .addComponent(cbacsamping))
+                    .addComponent(cbacsamping)
+                    .addComponent(txtposisiac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbaclainnya)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPanel1.add(ac, "card12");
@@ -1175,10 +1152,26 @@ public void slider3(){
         jLabel31.setText("Apakah Bisa Login?");
 
         cbssidya.setText("Ya");
+        cbssidya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbssidyaActionPerformed(evt);
+            }
+        });
 
         cbssidtidak.setText("Tidak");
+        cbssidtidak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbssidtidakActionPerformed(evt);
+            }
+        });
 
         cmbssid.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtloginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ssidLayout = new javax.swing.GroupLayout(ssid);
         ssid.setLayout(ssidLayout);
@@ -1191,10 +1184,14 @@ public void slider3(){
                     .addComponent(jLabel31))
                 .addGap(45, 45, 45)
                 .addGroup(ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbssidtidak)
-                    .addComponent(cbssidya)
-                    .addComponent(cmbssid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(cmbssid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ssidLayout.createSequentialGroup()
+                        .addGroup(ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbssidtidak)
+                            .addComponent(cbssidya))
+                        .addGap(28, 28, 28)
+                        .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         ssidLayout.setVerticalGroup(
             ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1203,12 +1200,17 @@ public void slider3(){
                 .addGroup(ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(cmbssid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
-                    .addComponent(cbssidya, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbssidtidak)
+                    .addGroup(ssidLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(ssidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31)
+                            .addComponent(cbssidya, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbssidtidak))
+                    .addGroup(ssidLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
@@ -1221,14 +1223,17 @@ public void slider3(){
         jLabel34.setText("Posisi");
 
         cbcctvdepan.setText("Depan");
+        cbcctvdepan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbcctvdepanActionPerformed(evt);
+            }
+        });
 
         cbcctvlainnya.setText("Lainnya");
 
         cbcctvbelakang.setText("Belakang");
 
-        cbcctvbaik.setText("Baik");
-
-        cbcctvrusak.setText("Rusak");
+        jLabel57.setText("Jumlah CCTV");
 
         javax.swing.GroupLayout cctvLayout = new javax.swing.GroupLayout(cctv);
         cctv.setLayout(cctvLayout);
@@ -1242,36 +1247,48 @@ public void slider3(){
             .addGroup(cctvLayout.createSequentialGroup()
                 .addGap(149, 149, 149)
                 .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel33))
-                .addGap(40, 40, 40)
-                .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbcctvbaik)
-                    .addComponent(cbcctvdepan))
-                .addGap(76, 76, 76)
-                .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbcctvrusak)
-                    .addComponent(cbcctvbelakang))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addGroup(cctvLayout.createSequentialGroup()
+                        .addComponent(jLabel57)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtjumlahcctv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cctvLayout.createSequentialGroup()
+                        .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel33))
+                        .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(cctvLayout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(cbcctvdepan)
+                                .addGap(37, 37, 37)
+                                .addComponent(cbcctvbelakang))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cctvLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtkondisicctv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(129, 129, 129)))
+                        .addComponent(txtposisicctv, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         cctvLayout.setVerticalGroup(
             cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cctvLayout.createSequentialGroup()
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel33)
-                        .addComponent(cbcctvbaik))
-                    .addComponent(cbcctvrusak))
-                .addGap(46, 46, 46)
+                .addGap(53, 53, 53)
+                .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(txtjumlahcctv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(txtkondisicctv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(cctvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(cbcctvdepan)
-                    .addComponent(cbcctvbelakang))
+                    .addComponent(cbcctvbelakang)
+                    .addComponent(txtposisicctv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cbcctvlainnya)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jPanel1.add(cctv, "card14");
@@ -1351,14 +1368,14 @@ public void slider3(){
 
         jLabel39.setText("Sirkulasi Udara");
 
-        jCheckBox17.setText("Lancar");
-        jCheckBox17.addActionListener(new java.awt.event.ActionListener() {
+        cblancar.setText("Lancar");
+        cblancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox17ActionPerformed(evt);
+                cblancarActionPerformed(evt);
             }
         });
 
-        jCheckBox18.setText("Tidak Lancar");
+        cbtidaklancar.setText("Tidak Lancar");
 
         jLabel40.setText("Pencahayaan");
 
@@ -1378,8 +1395,8 @@ public void slider3(){
                         .addComponent(jLabel39)
                         .addGap(115, 115, 115)
                         .addGroup(kebersihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox18)
-                            .addComponent(jCheckBox17)))
+                            .addComponent(cbtidaklancar)
+                            .addComponent(cblancar)))
                     .addGroup(kebersihanLayout.createSequentialGroup()
                         .addGroup(kebersihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel40)
@@ -1409,9 +1426,9 @@ public void slider3(){
                 .addGap(31, 31, 31)
                 .addGroup(kebersihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jCheckBox17))
+                    .addComponent(cblancar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox18)
+                .addComponent(cbtidaklancar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kebersihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sldrpencahayaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1735,13 +1752,6 @@ public void slider3(){
             }
         });
 
-        jButton6.setText("+");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1753,9 +1763,7 @@ public void slider3(){
                 .addComponent(btnprev)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnnext)
-                .addGap(77, 77, 77)
-                .addComponent(jButton6)
-                .addGap(65, 65, 65)
+                .addGap(145, 145, 145)
                 .addComponent(btnnew)
                 .addContainerGap())
         );
@@ -1767,8 +1775,7 @@ public void slider3(){
                     .addComponent(btnnew)
                     .addComponent(btnnext)
                     .addComponent(btnprev)
-                    .addComponent(jButton1)
-                    .addComponent(jButton6))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -1793,163 +1800,43 @@ public void slider3(){
     private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
 
         if (identitas.isShowing() && !txtnama.getText().equalsIgnoreCase("") && (!txtlokasi.getText().equalsIgnoreCase("") && (!cmbfakultas.getSelectedItem().equals("Pilih Fakultas")))) {
+            panel();
             kondisi.setVisible(true);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
-        } else if (kondisi.isShowing() && !txtpanjang.getText().equalsIgnoreCase("") && (!txtlebar.getText().equalsIgnoreCase("")) && (!txtjmlkursi.getText().equalsIgnoreCase(""))
-                && (!txtjmlpintu.getText().equalsIgnoreCase("")) && (!txtjmljendela.getText().equalsIgnoreCase(""))) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
+        } else if (kondisi.isShowing()) {
+            panel();
             steker.setVisible(true);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (steker.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
+            panel();
             lcd.setVisible(true);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (lcd.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
+            panel();
             lampu.setVisible(true);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (lampu.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
+            panel();
             kipas.setVisible(true);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (kipas.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
+            panel();
             ac.setVisible(true);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (ac.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
+            panel();
             ssid.setVisible(true);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (ssid.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
+            panel();
             cctv.setVisible(true);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(false);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
         } else if (cctv.isShowing()) {
-            kondisi.setVisible(false);
-            identitas.setVisible(false);
-            steker.setVisible(false);
-            lampu.setVisible(false);
-            ac.setVisible(false);
-            lcd.setVisible(false);
-            kipas.setVisible(false);
-            cctv.setVisible(false);
-            kebersihan.setVisible(false);
-            kenyamanan.setVisible(true);
-            ssid.setVisible(false);
-            keamanan.setVisible(false);
-            lingkungan.setVisible(false);
-//        } else if (lingkungan.isShowing() && (!cblantaibersih.getText().equals("") || !cblantaikotor.getText().equals("")) && (!cbatapbersih.getText().equals("") || !cbatapkotor.getText().equals(""))
-//                && (!cbdindingbersih.getText().equals("") || !cbdindingkotor.getText().equals("")) && (!cbjendelabersih.getText().equals("") || !cbjendelakotor.getText().equals(""))
-//                && (!cbpintubersih.getText().equals("") || !cbpintukotor.getText().equals(""))) {
-//            kondisi.setVisible(false);
-//            identitas.setVisible(false);
-//            steker.setVisible(false);
-//            lampu.setVisible(false);
-//            ac.setVisible(false);
-//            lcd.setVisible(false);
-//            kipas.setVisible(false);
-//            cctv.setVisible(false);
-//            kebersihan.setVisible(true);
-//            kenyamanan.setVisible(false);
-//            ssid.setVisible(false);
-//            keamanan.setVisible(false);
-//            lingkungan.setVisible(false);
-        }
+            panel();
+            lingkungan.setVisible(true);
+        }else if(lingkungan.isShowing()){
+            panel();
+                    kebersihan.setVisible(true);
+                }
+        else if(kebersihan.isShowing()){
+            panel();
+                    kenyamanan.setVisible(true);
+                }
                 else if(kenyamanan.isShowing()){
-                    kondisi.setVisible(false);
-                    identitas.setVisible(false);
-                    steker.setVisible(false);
-                    lampu.setVisible(false);
-                    ac.setVisible(false);
-                    lcd.setVisible(false);
-                    kipas.setVisible(false);
-                    cctv.setVisible(false);
-                    kebersihan.setVisible(false);
-                    kenyamanan.setVisible(false);
-                    ssid.setVisible(false);
-                    keamanan.setVisible(true);
-                    lingkungan.setVisible(false); 
+                 panel();
+                    keamanan.setVisible(true); 
                 }
         else {
             JOptionPane.showMessageDialog(null, "Data Belom Terisi,, Silahkan lengkapin Data !!!");
@@ -1959,8 +1846,10 @@ public void slider3(){
     }//GEN-LAST:event_btnnextActionPerformed
 
     private void btnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnewActionPerformed
-        kondisibaik();
-        jumlah();
+        if(cblancar.isSelected())
+            sirkulasi+="Lancar";
+        if(cbtidaklancar.isSelected())
+            sirkulasi+="Tidak Lancar";
         if(cbssidya.isSelected())
             login+="Bisa Login";
         if(cbssidtidak.isSelected())
@@ -1997,8 +1886,8 @@ public void slider3(){
             kebocoran+="Tidak Bocor";
         if(cbrusak.isSelected())
             kerusakan+="Rusak";
-        if(cbacbaik.isSelected())
-            kerusakan+="Baik";
+//        if(cbacbaik.isSelected())
+//            kerusakan+="Baik";
         if(cbaus.isSelected())
             keausan+="Aus";
         if(cbtidakaus.isSelected())
@@ -2051,18 +1940,12 @@ public void slider3(){
             txtjmljendela.setEditable(true);
             txtnama.requestFocus();
             btnnew.setText("Simpan");
-
-//            btnDelete.setText("Batal");
-//            btnEdit.setEnabled(false);
-//            btnPrev.setEnabled(false);
-//            btnNext.setEnabled(false);
         } else {
             if (!txtnama.getText().equals("") && !txtlokasi.getText().equals("") && !cmbfakultas.getSelectedItem().equals("Pilih Fakultas")
                     && !txtpanjang.getText().equals("") && !txtlebar.getText().equals("") && !txtjmlkursi.getText().equals("")
                     && !txtjmlpintu.getText().equals("") && !txtjmljendela.getText().equals("")) {
                 connect c = new connect(); //buka koneksi 
-                ruang m = new ruang();
-                posisi();
+                ruang m= new ruang();
                 m.setNama_ruang(txtnama.getText());
                 m.setLokasi_ruang(txtlokasi.getText());
                 m.setFakultas((String) cmbfakultas.getSelectedItem());
@@ -2071,32 +1954,35 @@ public void slider3(){
                 m.setJumlah_kursi(Integer.parseInt(txtjmlkursi.getText()));
                 m.setJumlah_pintu(Integer.parseInt(txtjmlpintu.getText()));
                 m.setJumlah_jendela(Integer.parseInt(txtjmljendela.getText()));
-                m.setJumlah_steker(jumlahsteker);
-                m.setJumlah_baik_steker(stekerbaik);
-                //m.setKondisi_steker(kondisi_steker);
-                m.setPosisi_steker(posisisteker);
-                m.setJumlah_kabel_LCD(jumlahlcd);
-                m.setJumlah_baik_lcd(lcdbaik);
-                m.setPosisi_kabel_LCD(posisilcd);
-                m.setJumlah_lampu(jumlahlampu);
-                m.setJumlah_baik_lcd(lampubaik);
-                m.setPosisi_kabel_LCD(posisilampu);
-                m.setJumlah_kipas_angin(jumlahkipas);
-                m.setJumlah_baik_kipas(kipasbaik);
-                m.setPosisi_kipas_angin(posisikipas);
-                m.setJumlah_AC(jumlahac);
-                m.setJumlah_baik_ac(acbaik);
-                m.setPosisi_AC(posisiac);
+                m.setJumlah_steker(Integer.parseInt(txtjumlahsteker.getText()));
+                m.setJumlah_baik_steker(Integer.parseInt(txtkondisisteker.getText()));
+                m.setPosisi_steker(txtposisisteker.getText());
+                m.setJumlah_kabel_LCD(Integer.parseInt(txtjumlahlcd.getText()));
+                m.setJumlah_baik_lcd(Integer.parseInt(txtlcdkondisi.getText()));
+                m.setPosisi_kabel_LCD(txtposisilcd.getText());
+                m.setJumlah_lampu(Integer.parseInt(txtjumlahlampu.getText()));
+                m.setJumlah_baik_lampu(Integer.parseInt(txtkondisilampu.getText()));
+                m.setPosisi_lampu(txtposisilampu.getText());
+                m.setJumlah_kipas_angin(Integer.parseInt(txtjumlahkipas.getText()));
+                m.setJumlah_baik_kipas(Integer.parseInt(txtkondisikipas.getText()));
+                m.setPosisi_kipas_angin(txtposisikipas.getText());
+                m.setJumlah_AC(Integer.parseInt(txtjumlahac.getText()));
+                m.setJumlah_baik_ac(Integer.parseInt(txtkondisiAC.getText()));
+                m.setPosisi_AC(txtposisiac.getText());
                 m.setSSID((String) cmbssid.getSelectedItem());
                 m.setBandwidth(login);
-                m.setJumlah_CCTV(jumlahcctv);
-                m.setJumlah_baik_cctv(cctvbaik);
-                m.setPosisi_CCTV(posisicctv);
+                m.setJumlah_CCTV(Integer.parseInt(txtjumlahcctv.getText()));
+                m.setJumlah_baik_cctv(Integer.parseInt(txtkondisicctv.getText()));
+                m.setPosisi_CCTV(txtposisicctv.getText());
                 m.setKondisi_lantai(lantai);
                 m.setKondisi_dinding(dinding);
                 m.setKondisi_atap(atap);
                 m.setKondisi_pintu(pintu);
                 m.setKondisi_jendela(jendela);
+                m.setSirkulasi_udara(sirkulasi);
+                m.setPencahayaan(Integer.parseInt(p.getText()));
+                m.setKelembapan(Integer.parseInt(k.getText()));
+                m.setSuhu(Integer.parseInt(s.getText()));
                 m.setKebisingan(kebisingan);
                 m.setBau(bau);
                 m.setKebocoran(kebocoran);
@@ -2136,11 +2022,6 @@ public void slider3(){
                 txtjmlpintu.setEditable(false);
                 txtjmljendela.setEditable(false);
                 btnnew.setText("Baru");
-                //tbldata.setVisible(true);
-//                btnDelete.setText("Hapus");
-//                btnEdit.setEnabled(true);
-//                btnPrev.setEnabled(true);
-//                btnNext.setEnabled(true);
                 c.closeConnection(); //tutup koneksi 
             } else {
                 JOptionPane.showMessageDialog(this, "Mohon isi data dengan benar", "Informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -2150,18 +2031,41 @@ public void slider3(){
     }//GEN-LAST:event_btnnewActionPerformed
 
     private void btnprevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprevActionPerformed
-
-//       String qwe = txtpanjang.getText();
-//       int ewq = qwe.length();
-//       String s2 = txtnama.getText();
-//       int i2 = s2.length();
-//        
-//        if(ewq > 0  )  {
-//            kondisi.setVisible(true);
-//        }else if (i2 > 0){
-//            identitas.setVisible(true);
-//        }                                  
-//      //}     
+if(kondisi.isShowing()){
+    panel();
+    identitas.setVisible(true);
+}
+else if(lcd.isShowing()){
+    panel();
+    kondisi.setVisible(true);
+}else if(lampu.isShowing()){
+    panel();
+    lcd.setVisible(true);
+}else if(kipas.isShowing()){
+    panel();
+    lampu.setVisible(true);
+}else if(ac.isShowing()){
+    panel();
+    kipas.setVisible(true);
+}else if(ssid.isShowing()){
+    panel();
+    ac.setVisible(true);
+}else if(cctv.isShowing()){
+    panel();
+    ssid.setVisible(true);
+}else if(lingkungan.isShowing()){
+    panel();
+    cctv.setVisible(true);
+}else if(kebersihan.isShowing()){
+    panel();
+    lingkungan.setVisible(true);
+}else if(kenyamanan.isShowing()){
+    panel();
+    kebersihan.setVisible(true);
+}else if(keamanan.isShowing()){
+    panel();
+    kenyamanan.setVisible(true);
+}
     }//GEN-LAST:event_btnprevActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2172,9 +2076,9 @@ public void slider3(){
         kondisi.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBox17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox17ActionPerformed
+    private void cblancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblancarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox17ActionPerformed
+    }//GEN-LAST:event_cblancarActionPerformed
 
     private void cbbauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbauActionPerformed
         // TODO add your handling code here:
@@ -2193,9 +2097,10 @@ public void slider3(){
     }//GEN-LAST:event_txtpanjangActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+
         try {
             koneksi();
-           // ruang ru=new ruang();
+            ruang ru=new ruang();
             String sql= "delete from datafull where nama_ruang='" + txtnama.getText()+ "'";
             cn.executeUpdate(sql);
             conn.close();
@@ -2208,25 +2113,27 @@ public void slider3(){
 
     }//GEN-LAST:event_btndeleteActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void cblampulainnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblampulainnyActionPerformed
         // TODO add your handling code here:
+        txtposisilampu.setText("Lainnya");
+        cblampuatap.setSelected(false);
     }//GEN-LAST:event_cblampulainnyActionPerformed
 
     private void cbkipasatapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbkipasatapActionPerformed
-        cbkipaslainnya.setVisible(false);
+        cbkipaslainnya.setSelected(false);
+        txtposisikipas.setText("Atap Ruangan");
     }//GEN-LAST:event_cbkipasatapActionPerformed
 
     private void cbacbelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbacbelakangActionPerformed
-        cbacsamping.setVisible(false);
+        txtposisiac.setText("Belakang");
+        cbacsamping.setSelected(false);
+        cbaclainnya.setSelected(false);
+        
     }//GEN-LAST:event_cbacbelakangActionPerformed
 
     private void cbkipaslainnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbkipaslainnyaActionPerformed
-        cbkipasatap.setVisible(false);
+        cbkipasatap.setSelected(false);
+        txtposisikipas.setText("Lainnya");
     }//GEN-LAST:event_cbkipaslainnyaActionPerformed
 
     private void cbbahayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbahayaActionPerformed
@@ -2234,69 +2141,142 @@ public void slider3(){
     }//GEN-LAST:event_cbbahayaActionPerformed
 
     private void cbdindingkotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbdindingkotorActionPerformed
-        cbdindingbersih.setVisible(false);
+        cbdindingbersih.setSelected(false);
     }//GEN-LAST:event_cbdindingkotorActionPerformed
 
     private void cbpintubersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpintubersihActionPerformed
-        cbpintukotor.setVisible(false);
+        cbpintukotor.setSelected(false);
     }//GEN-LAST:event_cbpintubersihActionPerformed
 
     private void cblantaibersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblantaibersihActionPerformed
-        cblantaikotor.setVisible(false);
+        cblantaikotor.setSelected(false);
     }//GEN-LAST:event_cblantaibersihActionPerformed
 
     private void cblantaikotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblantaikotorActionPerformed
-        cblantaibersih.setVisible(false);
+        cblantaibersih.setSelected(false);
     }//GEN-LAST:event_cblantaikotorActionPerformed
 
     private void cbdindingbersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbdindingbersihActionPerformed
-        cbdindingkotor.setVisible(false);
+        cbdindingkotor.setSelected(false);
     }//GEN-LAST:event_cbdindingbersihActionPerformed
 
     private void cbatapbersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbatapbersihActionPerformed
-        cbatapkotor.setVisible(false);
+        cbatapkotor.setSelected(false);
     }//GEN-LAST:event_cbatapbersihActionPerformed
 
     private void cbatapkotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbatapkotorActionPerformed
-        cbatapbersih.setVisible(false);
+        cbatapbersih.setSelected(false);
     }//GEN-LAST:event_cbatapkotorActionPerformed
 
     private void cbjendelabersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbjendelabersihActionPerformed
-        cbjendelakotor.setVisible(false);
+        cbjendelakotor.setSelected(false);
     }//GEN-LAST:event_cbjendelabersihActionPerformed
 
     private void cbjendelakotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbjendelakotorActionPerformed
-        cbjendelabersih.setVisible(false);
+        cbjendelabersih.setSelected(false);
     }//GEN-LAST:event_cbjendelakotorActionPerformed
 
     private void cbpintukotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpintukotorActionPerformed
-        cbpintubersih.setVisible(false);
+        cbpintubersih.setSelected(false);
     }//GEN-LAST:event_cbpintukotorActionPerformed
 
     private void cbstekerpojokruangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerpojokruangActionPerformed
-        // TODO add your handling code here:
+        txtposisisteker.setText("Pojok Ruang");
+        cbstekerbelakang.setSelected(false);
+        cbstekersamping.setSelected(false);
+        cbstekerdekatmahasiswa.setSelected(false);
+        cbstekerlainnya.setSelected(false);
+        cbstekerdekatdosen.setSelected(false);
     }//GEN-LAST:event_cbstekerpojokruangActionPerformed
 
     private void cbstekersampingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekersampingActionPerformed
-        // TODO add your handling code here:
+        txtposisisteker.setText("Samping");
+        cbstekerpojokruang.setSelected(false);
+        cbstekerdekatmahasiswa.setSelected(false);
+        cbstekerbelakang.setSelected(false);
+        cbstekerlainnya.setSelected(false);
+        cbstekerdekatdosen.setSelected(false);
     }//GEN-LAST:event_cbstekersampingActionPerformed
 
-    private void cblcdrusakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblcdrusakActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cblcdrusakActionPerformed
-
     private void cbacsampingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbacsampingActionPerformed
-        cbacbelakang.setVisible(false);
+        cbacbelakang.setSelected(false);
+        cbaclainnya.setSelected(false);
+        txtposisiac.setText("Samping");
     }//GEN-LAST:event_cbacsampingActionPerformed
 
-    private void cbstekerbaikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerbaikActionPerformed
-        cbstekerburuk.setSelected(false);
-    }//GEN-LAST:event_cbstekerbaikActionPerformed
+    private void cbstekerdekatdosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerdekatdosenActionPerformed
+        // TODO add your handling code here:
+        txtposisisteker.setText("Dekat Dosen");
+        cbstekerbelakang.setSelected(false);
+        cbstekersamping.setSelected(false);
+        cbstekerdekatmahasiswa.setSelected(false);
+        cbstekerlainnya.setSelected(false);
+        cbstekerpojokruang.setSelected(false);
+    }//GEN-LAST:event_cbstekerdekatdosenActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jumlah();
-        kondisibaik();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void cbstekerbelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerbelakangActionPerformed
+        txtposisisteker.setText("Belakang");
+        cbstekerpojokruang.setSelected(false);
+        cbstekersamping.setSelected(false);
+        cbstekerdekatmahasiswa.setSelected(false);
+        cbstekerlainnya.setSelected(false);
+        cbstekerdekatdosen.setSelected(false);
+    }//GEN-LAST:event_cbstekerbelakangActionPerformed
+
+    private void cbstekerdekatmahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerdekatmahasiswaActionPerformed
+        txtposisisteker.setText("Dekat Mahasiswa");
+        cbstekerpojokruang.setSelected(false);
+        cbstekersamping.setSelected(false);
+        cbstekerbelakang.setSelected(false);
+        cbstekerlainnya.setSelected(false);
+        cbstekerdekatdosen.setSelected(false);
+    }//GEN-LAST:event_cbstekerdekatmahasiswaActionPerformed
+
+    private void cbstekerlainnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbstekerlainnyaActionPerformed
+        cbstekerpojokruang.setSelected(false);
+        cbstekerdekatmahasiswa.setSelected(false);
+        cbstekerbelakang.setSelected(false);
+        cbstekersamping.setSelected(false);
+        cbstekerdekatdosen.setSelected(false);
+    }//GEN-LAST:event_cbstekerlainnyaActionPerformed
+
+    private void cblcddekatdosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblcddekatdosenActionPerformed
+        // TODO add your handling code here:
+        txtposisilcd.setText("Dekat Dosen");
+        cblcdlainnya.setSelected(false);
+    }//GEN-LAST:event_cblcddekatdosenActionPerformed
+
+    private void cblampuatapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblampuatapActionPerformed
+        txtposisilampu.setText("Atap");
+        cblampulainny.setSelected(false);
+    }//GEN-LAST:event_cblampuatapActionPerformed
+
+    private void cbaclainnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbaclainnyaActionPerformed
+        // TODO add your handling code here:
+        txtposisiac.setText("Lainnya");
+        cbacbelakang.setSelected(false);
+        cbacsamping.setSelected(false);
+    }//GEN-LAST:event_cbaclainnyaActionPerformed
+
+    private void cbcctvdepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbcctvdepanActionPerformed
+        // TODO add your handling code here:
+        txtposisicctv.setText("Depan");
+        
+    }//GEN-LAST:event_cbcctvdepanActionPerformed
+
+    private void txtloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtloginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtloginActionPerformed
+
+    private void cbssidyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbssidyaActionPerformed
+        txtlogin.setText("Bisa Login");
+        cbssidtidak.setSelected(false);
+    }//GEN-LAST:event_cbssidyaActionPerformed
+
+    private void cbssidtidakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbssidtidakActionPerformed
+        txtlogin.setText("Tidak Bisa Login");
+        cbssidya.setSelected(false);
+    }//GEN-LAST:event_cbssidtidakActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2341,10 +2321,8 @@ public void slider3(){
     private javax.swing.JButton btnnext;
     private javax.swing.JButton btnprev;
     private javax.swing.JPanel cari;
-    private javax.swing.JCheckBox cbacbaik;
     private javax.swing.JCheckBox cbacbelakang;
     private javax.swing.JCheckBox cbaclainnya;
-    private javax.swing.JCheckBox cbacrusak;
     private javax.swing.JCheckBox cbacsamping;
     private javax.swing.JCheckBox cbada;
     private javax.swing.JCheckBox cbaman;
@@ -2356,39 +2334,30 @@ public void slider3(){
     private javax.swing.JCheckBox cbbau;
     private javax.swing.JCheckBox cbbising;
     private javax.swing.JCheckBox cbbocor;
-    private javax.swing.JCheckBox cbcctvbaik;
     private javax.swing.JCheckBox cbcctvbelakang;
     private javax.swing.JCheckBox cbcctvdepan;
     private javax.swing.JCheckBox cbcctvlainnya;
-    private javax.swing.JCheckBox cbcctvrusak;
     private javax.swing.JCheckBox cbdindingbersih;
     private javax.swing.JCheckBox cbdindingkotor;
     private javax.swing.JCheckBox cbjendelabersih;
     private javax.swing.JCheckBox cbjendelakotor;
     private javax.swing.JCheckBox cbkipasatap;
-    private javax.swing.JCheckBox cbkipasbaik;
     private javax.swing.JCheckBox cbkipaslainnya;
-    private javax.swing.JCheckBox cbkipasrusa;
     private javax.swing.JCheckBox cbkokoh;
     private javax.swing.JCheckBox cblampuatap;
-    private javax.swing.JCheckBox cblampubaik;
     private javax.swing.JCheckBox cblampulainny;
-    private javax.swing.JCheckBox cblampurusak;
+    private javax.swing.JCheckBox cblancar;
     private javax.swing.JCheckBox cblantaibersih;
     private javax.swing.JCheckBox cblantaikotor;
-    private javax.swing.JCheckBox cblcdbaik;
     private javax.swing.JCheckBox cblcddekatdosen;
     private javax.swing.JCheckBox cblcdlainnya;
-    private javax.swing.JCheckBox cblcdrusak;
     private javax.swing.JCheckBox cbpintubersih;
     private javax.swing.JCheckBox cbpintukotor;
     private javax.swing.JCheckBox cbrapuh;
     private javax.swing.JCheckBox cbrusak;
     private javax.swing.JCheckBox cbssidtidak;
     private javax.swing.JCheckBox cbssidya;
-    private javax.swing.JCheckBox cbstekerbaik;
     private javax.swing.JCheckBox cbstekerbelakang;
-    private javax.swing.JCheckBox cbstekerburuk;
     private javax.swing.JCheckBox cbstekerdekatdosen;
     private javax.swing.JCheckBox cbstekerdekatmahasiswa;
     private javax.swing.JCheckBox cbstekerlainnya;
@@ -2399,15 +2368,13 @@ public void slider3(){
     private javax.swing.JCheckBox cbtidakbau;
     private javax.swing.JCheckBox cbtidakbising;
     private javax.swing.JCheckBox cbtidakbocor;
+    private javax.swing.JCheckBox cbtidaklancar;
     private javax.swing.JPanel cctv;
     private javax.swing.JComboBox cmbfakultas;
     private javax.swing.JComboBox cmbssid;
     private javax.swing.JPanel data;
-    private javax.swing.JPanel identitas;
+    static javax.swing.JPanel identitas;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2420,6 +2387,9 @@ public void slider3(){
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -2455,6 +2425,9 @@ public void slider3(){
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2465,34 +2438,54 @@ public void slider3(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField k;
     private javax.swing.JPanel keamanan;
     private javax.swing.JPanel kebersihan;
     private javax.swing.JPanel kenyamanan;
     private javax.swing.JPanel kipas;
-    private javax.swing.JPanel kondisi;
+    static javax.swing.JPanel kondisi;
     private javax.swing.JPanel lampu;
     private javax.swing.JPanel lcd;
-    private javax.swing.JPanel lingkungan;
+    static javax.swing.JPanel lingkungan;
     private javax.swing.JTextField p;
     private javax.swing.JTextField s;
     private javax.swing.JSlider sldrkelembapan;
     private javax.swing.JSlider sldrpencahayaan;
     private javax.swing.JSlider sldrsuhu;
     private javax.swing.JPanel ssid;
-    private javax.swing.JPanel steker;
+    static javax.swing.JPanel steker;
     private javax.swing.JTable tbldata;
     private javax.swing.JTextField txtjmljendela;
     private javax.swing.JTextField txtjmlkursi;
     private javax.swing.JTextField txtjmlpintu;
+    private javax.swing.JTextField txtjumlahac;
+    private javax.swing.JTextField txtjumlahcctv;
+    private javax.swing.JTextField txtjumlahkipas;
+    private javax.swing.JTextField txtjumlahlampu;
+    private javax.swing.JTextField txtjumlahlcd;
+    private javax.swing.JTextField txtjumlahsteker;
+    private javax.swing.JTextField txtkondisiAC;
+    private javax.swing.JTextField txtkondisicctv;
+    private javax.swing.JTextField txtkondisikipas;
+    private javax.swing.JTextField txtkondisilampu;
+    private javax.swing.JTextField txtkondisisteker;
+    private javax.swing.JTextField txtlcdkondisi;
     private javax.swing.JTextField txtlebar;
+    private javax.swing.JTextField txtlogin;
     private javax.swing.JTextField txtloka;
     private javax.swing.JTextField txtlokasi;
     private javax.swing.JTextField txtnama;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtpanjang;
+    private javax.swing.JTextField txtposisiac;
+    private javax.swing.JTextField txtposisicctv;
+    private javax.swing.JTextField txtposisikipas;
+    private javax.swing.JTextField txtposisilampu;
+    private javax.swing.JTextField txtposisilcd;
+    private javax.swing.JTextField txtposisisteker;
     // End of variables declaration//GEN-END:variables
 
     //private static class ChangeListener implements javax.swing.event.ChangeListener {
+
+    
 }

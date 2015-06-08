@@ -2,6 +2,7 @@ package ruang;
 
 
 import java.util.Set;
+import javax.swing.JTextField;
 
 
 
@@ -23,24 +24,24 @@ public class ruang {
     private int jumlah_steker;
     private int jumlah_baik_steker;
     private String kondisi_steker;
-    private int posisi_steker;
+    private String posisi_steker;
     private int jumlah_kabel_LCD;
     private String kondisi_kabel_LCD;
-    private int posisi_kabel_LCD;
+    private String posisi_kabel_LCD;
     private int jumlah_lampu;
     private String kondisi_lampu;
-    private int posisi_lampu;
+    private String posisi_lampu;
     private int jumlah_kipas_angin;
     private String kondisi_kipas_angin;
-    private int posisi_kipas_angin;
+    private String posisi_kipas_angin;
     private int jumlah_AC;
     private String kondisi_AC;
-    private int posisi_AC;
+    private String posisi_AC;
     private String SSID;
     private String bandwidth;
     private int jumlah_CCTV;
     private String kondisi_CCTV;
-    private int posisi_CCTV;
+    private String posisi_CCTV;
     private String kondisi_lantai;
     private String kondisi_dinding;
     private String kondisi_atap;
@@ -172,7 +173,7 @@ public class ruang {
         this.kondisi_steker = kondisi_steker;
     }
 
-    public void setPosisi_steker(int posisi_steker) {
+    public void setPosisi_steker(String posisi_steker) {
         this.posisi_steker = posisi_steker;
     }
 
@@ -184,7 +185,7 @@ public class ruang {
         this.kondisi_kabel_LCD = kondisi_kabel_LCD;
     }
 
-    public void setPosisi_kabel_LCD(int posisi_kabel_LCD) {
+    public void setPosisi_kabel_LCD(String posisi_kabel_LCD) {
         this.posisi_kabel_LCD = posisi_kabel_LCD;
     }
 
@@ -196,7 +197,7 @@ public class ruang {
         this.kondisi_lampu = kondisi_lampu;
     }
 
-    public void setPosisi_lampu(int posisi_lampu) {
+    public void setPosisi_lampu(String posisi_lampu) {
         this.posisi_lampu = posisi_lampu;
     }
 
@@ -208,7 +209,7 @@ public class ruang {
         this.kondisi_kipas_angin = kondisi_kipas_angin;
     }
 
-    public void setPosisi_kipas_angin(int posisi_kipas_angin) {
+    public void setPosisi_kipas_angin(String posisi_kipas_angin) {
         this.posisi_kipas_angin = posisi_kipas_angin;
     }
 
@@ -220,7 +221,7 @@ public class ruang {
         this.kondisi_AC = kondisi_AC;
     }
 
-    public void setPosisi_AC(int posisi_AC) {
+    public void setPosisi_AC(String posisi_AC) {
         this.posisi_AC = posisi_AC;
     }
 
@@ -240,7 +241,7 @@ public class ruang {
         this.kondisi_CCTV = kondisi_CCTV;
     }
 
-    public void setPosisi_CCTV(int posisi_CCTV) {
+    public void setPosisi_CCTV(String posisi_CCTV) {
         this.posisi_CCTV = posisi_CCTV;
     }
 
@@ -352,7 +353,7 @@ public class ruang {
         return kondisi_steker;
     }
 
-    public int getPosisi_steker() {
+    public String getPosisi_steker() {
         return posisi_steker;
     }
 
@@ -364,7 +365,7 @@ public class ruang {
         return kondisi_kabel_LCD;
     }
 
-    public int getPosisi_kabel_LCD() {
+    public String getPosisi_kabel_LCD() {
         return posisi_kabel_LCD;
     }
 
@@ -376,7 +377,7 @@ public class ruang {
         return kondisi_lampu;
     }
 
-    public int getPosisi_lampu() {
+    public String getPosisi_lampu() {
         return posisi_lampu;
     }
 
@@ -388,7 +389,7 @@ public class ruang {
         return kondisi_kipas_angin;
     }
 
-    public int getPosisi_kipas_angin() {
+    public String getPosisi_kipas_angin() {
         return posisi_kipas_angin;
     }
 
@@ -400,7 +401,7 @@ public class ruang {
         return kondisi_AC;
     }
 
-    public int getPosisi_AC() {
+    public String getPosisi_AC() {
         return posisi_AC;
     }
 
@@ -420,7 +421,7 @@ public class ruang {
         return kondisi_CCTV;
     }
 
-    public int getPosisi_CCTV() {
+    public String getPosisi_CCTV() {
         return posisi_CCTV;
     }
 
@@ -492,30 +493,35 @@ public class ruang {
     }
     
 //    
-   public void ruang(String nama_ruang, String lokasi_ruang, String fakultas){
+   public ruang(String nama_ruang, String lokasi_ruang, String fakultas,int panjang_ruang,int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela){
         setNama_ruang(nama_ruang);
         setLokasi_ruang(lokasi_ruang);
         setFakultas(fakultas);
-    }
-    public void ruang(int panjang_ruang,int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela){
         setPanjang_ruang(panjang_ruang);
         setLebar_ruang(lebar_ruang);
         setJumlah_kursi(jumlah_kursi);
         setJumlah_pintu(jumlah_pintu);
         setJumlah_jendela(jumlah_jendela);
-        //return panjang_ruang;
-        
     }
-    public  ruang(int jumlah_steker, String kondisi_steker, int posisi_steker, int jumlah_kabel_LCD, 
-            int kondisi_kabel_LCD, int posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
-            int posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, int posisi_kipas_angin,
-            int jumlah_AC, String kondisi_AC,int posisi_AC,String SSID, String bandwidth, int jumlah_CCTV, 
-            String kondisi_CCTV, int posisi_CCTV){
+//    public void ruang(int panjang_ruang,int lebar_ruang, int jumlah_kursi, int jumlah_pintu, int jumlah_jendela){
+//        setPanjang_ruang(panjang_ruang);
+//        setLebar_ruang(lebar_ruang);
+//        setJumlah_kursi(jumlah_kursi);
+//        setJumlah_pintu(jumlah_pintu);
+//        setJumlah_jendela(jumlah_jendela);
+//        //return panjang_ruang;
+//        
+//    }
+    public  ruang(int jumlah_steker, String kondisi_steker, String posisi_steker, int jumlah_kabel_LCD, 
+            int kondisi_kabel_LCD, String posisi_kabel_LCD, int jumlah_lampu,String kondisi_lampu ,
+            String posisi_lampu, int jumlah_kipas_angin, String kondisi_kipas_angin, String posisi_kipas_angin,
+            int jumlah_AC, String kondisi_AC,String posisi_AC,String SSID, String bandwidth, int jumlah_CCTV, 
+            String kondisi_CCTV, String posisi_CCTV){
         setJumlah_steker(jumlah_steker);
         setKondisi_steker(kondisi_steker);
         setPosisi_steker(posisi_steker);
         setJumlah_kabel_LCD(jumlah_kabel_LCD);
-        setKondisi_kabel_LCD(kondisi_kabel_LCD);
+        //setKondisi_kabel_LCD(kondisi_kabel_LCD);
         setPosisi_kabel_LCD(posisi_kabel_LCD);
         setJumlah_lampu(jumlah_lampu);
         setKondisi_lampu(kondisi_lampu);
@@ -565,12 +571,8 @@ public class ruang {
     }
     public ruang(){
     }
-    //public void  input_identitas_ruang_kelas();
 
-    private void setKondisi_kabel_LCD(int kondisi_kabel_LCD) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
    
 
     

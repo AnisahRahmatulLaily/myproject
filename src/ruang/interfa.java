@@ -11,7 +11,7 @@ package ruang;
  * @author TOSHIBA
  */
 public interface interfa {
-    void input_identitas_kelas();
+    void input_identitas_ruang_kelas();
     public void input_kondisi_ruang_kelas();
     public void kondisi_dan_posisi_sarana();
     public void input_lingkungan_ruang_kelas();

@@ -56,33 +56,33 @@ public class connect {
                 ru.setJumlah_jendela(rs.getInt("jumlah_jendela"));
                 ru.setJumlah_steker(rs.getInt("jumlah_steker"));
                 ru.setJumlah_baik_steker(rs.getInt("kondisi_steker"));
-                ru.setPosisi_steker(rs.getInt("posisi_steker"));
+                ru.setPosisi_steker(rs.getString("posisi_steker"));
                 ru.setJumlah_kabel_LCD(rs.getInt("jumlah_lcd"));
                 ru.setJumlah_baik_lcd(rs.getInt("kondisi_lcd"));
-                ru.setPosisi_kabel_LCD(rs.getInt("posisi_lcd"));
+                ru.setPosisi_kabel_LCD(rs.getString("posisi_lcd"));
                 ru.setJumlah_lampu(rs.getInt("jumlah_lampu"));
                 ru.setJumlah_baik_lampu(rs.getInt("kondisi_lampu"));
-                ru.setPosisi_lampu(rs.getInt("posisi_lampu"));
+                ru.setPosisi_lampu(rs.getString("posisi_lampu"));
                 ru.setJumlah_kipas_angin(rs.getInt("jumlah_kipas"));
                 ru.setJumlah_baik_kipas(rs.getInt("kondisi_kipas"));
-                ru.setPosisi_kipas_angin(rs.getInt("posisi_kipas"));
+                ru.setPosisi_kipas_angin(rs.getString("posisi_kipas"));
                 ru.setJumlah_AC(rs.getInt("jumlah_ac"));
                 ru.setJumlah_baik_ac(rs.getInt("kondisi_ac"));
-                ru.setPosisi_AC(rs.getInt("posisi_ac"));
+                ru.setPosisi_AC(rs.getString("posisi_ac"));
                 ru.setSSID(rs.getString("ssid"));
                 ru.setBandwidth(rs.getString("login"));
                 ru.setJumlah_CCTV(rs.getInt("jumlah_cctv"));
                 ru.setJumlah_baik_cctv(rs.getInt("kondisi_cctv"));
-                ru.setPosisi_CCTV(rs.getInt("posisi_cctv"));
+                ru.setPosisi_CCTV(rs.getString("posisi_cctv"));
                 ru.setKondisi_lantai(rs.getString("kondisi_lantai"));
                 ru.setKondisi_dinding(rs.getString("kondisi_dinding"));
                 ru.setKondisi_atap(rs.getString("kondisi_atap"));
                 ru.setKondisi_pintu(rs.getString("kondisi_pintu"));
                 ru.setKondisi_jendela(rs.getString("kondisi_jendela"));
-//                ru.setSirkulasi_udara(rs.getString("sirkulasi"));
-//                ru.setPencahayaan(rs.getInt("pencahayaan"));
-//                ru.setKelembapan(rs.getInt("kelembapan"));
-//                ru.setSuhu(rs.getInt("suhu"));
+                ru.setSirkulasi_udara(rs.getString("sirkulasi"));
+                ru.setPencahayaan(rs.getInt("pencahayaan"));
+                ru.setKelembapan(rs.getInt("kelembapan"));
+                ru.setSuhu(rs.getInt("suhu"));
                 ru.setKebisingan(rs.getString("kebisingan"));
                 ru.setBau(rs.getString("bau"));
                 ru.setKebocoran(rs.getString("kebocoran"));
@@ -112,7 +112,7 @@ public class connect {
                     + "'" +ru.getPosisi_AC()+"','" +ru.getSSID()+"','" +ru.getBandwidth()+"','" +ru.getJumlah_CCTV()+"','" +ru.getJumlah_baik_cctv()+"',"
                     + "'" +ru.getPosisi_CCTV()+"','" +ru.getKondisi_lantai()+"','" +ru.getKondisi_dinding()+"','" +ru.getKondisi_atap()+"',"
                     + "'" +ru.getKondisi_pintu()+"','" +ru.getKondisi_jendela()+"',"
-//                    + "'" +ru.getSirkulasi_udara()+"','" +ru.getPencahayaan()+"','" +ru.getKelembapan()+"','" +ru.getSuhu()+"',"
+                    + "'" +ru.getSirkulasi_udara()+"','" +ru.getPencahayaan()+"','" +ru.getKelembapan()+"','" +ru.getSuhu()+"',"
                     + "'" +ru.getKebisingan()+"','" +ru.getBau()+"','" +ru.getKebocoran()+"',"
                     + "'" +ru.getKerusakan()+"','" +ru.getKeausan()+"','" +ru.getKekokohan()+"','" +ru.getJumlah_kunci()+"','" +ru.getBahaya()+"')"); 
         } catch (Exception e) { 
@@ -150,6 +150,7 @@ public class connect {
             e.printStackTrace(); 
         } 
     } 
+    
     
 } 
 
