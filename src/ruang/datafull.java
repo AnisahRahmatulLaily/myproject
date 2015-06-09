@@ -55,6 +55,19 @@ public class datafull extends javax.swing.JFrame {
 
         loadData();
         bindData();
+        identitas.setVisible(true);
+        kondisi.setVisible(false);
+            steker.setVisible(false);
+            lampu.setVisible(false);
+            ac.setVisible(false);
+            lcd.setVisible(false);
+            kipas.setVisible(false);
+            cctv.setVisible(false);
+            kebersihan.setVisible(false);
+            kenyamanan.setVisible(false);
+            ssid.setVisible(false);
+            keamanan.setVisible(false);
+            lingkungan.setVisible(false);
         //this.setTitle("Data Mahasiswa");
         txtnama.setEditable(false);
         txtlokasi.setEditable(false);
@@ -297,14 +310,6 @@ public void input(){
         jPanel2 = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        identitas = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtnama = new javax.swing.JTextField();
-        txtlokasi = new javax.swing.JTextField();
-        cmbfakultas = new javax.swing.JComboBox();
         kondisi = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -442,6 +447,7 @@ public void input(){
         jLabel48 = new javax.swing.JLabel();
         cbaus = new javax.swing.JCheckBox();
         cbtidakaus = new javax.swing.JCheckBox();
+        jLabel58 = new javax.swing.JLabel();
         lingkungan = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
         cblantaibersih = new javax.swing.JCheckBox();
@@ -458,6 +464,14 @@ public void input(){
         jLabel53 = new javax.swing.JLabel();
         cbpintubersih = new javax.swing.JCheckBox();
         cbpintukotor = new javax.swing.JCheckBox();
+        identitas = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtnama = new javax.swing.JTextField();
+        txtlokasi = new javax.swing.JTextField();
+        cmbfakultas = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         btnnew = new javax.swing.JButton();
         btnnext = new javax.swing.JButton();
@@ -480,62 +494,6 @@ public void input(){
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.CardLayout());
-
-        jLabel1.setFont(new java.awt.Font("Kristen ITC", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("IDENTITAS RUANG");
-
-        jLabel2.setText("Ruang Kelas");
-
-        jLabel3.setText("Lokasi");
-
-        jLabel4.setText("Fakultas");
-
-        cmbfakultas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Fakultas", "aa", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout identitasLayout = new javax.swing.GroupLayout(identitas);
-        identitas.setLayout(identitasLayout);
-        identitasLayout.setHorizontalGroup(
-            identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(identitasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
-                    .addGroup(identitasLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(61, 61, 61)
-                        .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtlokasi, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbfakultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        identitasLayout.setVerticalGroup(
-            identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(identitasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtlokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbfakultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(identitas, "card2");
 
         jLabel5.setFont(new java.awt.Font("Kristen ITC", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1165,7 +1123,7 @@ public void input(){
             }
         });
 
-        cmbssid.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbssid.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UMM HOTSPOT", "Library Hostspot" }));
 
         txtlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1496,6 +1454,8 @@ public void input(){
 
         cbtidakaus.setText("Tidak Aus");
 
+        jLabel58.setText("Kebocoran");
+
         javax.swing.GroupLayout kenyamananLayout = new javax.swing.GroupLayout(kenyamanan);
         kenyamanan.setLayout(kenyamananLayout);
         kenyamananLayout.setHorizontalGroup(
@@ -1507,7 +1467,8 @@ public void input(){
                     .addComponent(jLabel44)
                     .addComponent(jLabel45)
                     .addComponent(jLabel47)
-                    .addComponent(jLabel48))
+                    .addComponent(jLabel48)
+                    .addComponent(jLabel58))
                 .addGap(68, 68, 68)
                 .addGroup(kenyamananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbbising)
@@ -1541,7 +1502,8 @@ public void input(){
                 .addGap(8, 8, 8)
                 .addGroup(kenyamananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbocor)
-                    .addComponent(cbtidakbocor))
+                    .addComponent(cbtidakbocor)
+                    .addComponent(jLabel58))
                 .addGap(9, 9, 9)
                 .addGroup(kenyamananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbrusak)
@@ -1723,6 +1685,62 @@ public void input(){
         );
 
         jPanel1.add(lingkungan, "card16");
+
+        jLabel1.setFont(new java.awt.Font("Kristen ITC", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("IDENTITAS RUANG");
+
+        jLabel2.setText("Ruang Kelas");
+
+        jLabel3.setText("Lokasi");
+
+        jLabel4.setText("Fakultas");
+
+        cmbfakultas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Fakultas", "FKIP", "TEKNIK", "FPP" }));
+
+        javax.swing.GroupLayout identitasLayout = new javax.swing.GroupLayout(identitas);
+        identitas.setLayout(identitasLayout);
+        identitasLayout.setHorizontalGroup(
+            identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(identitasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addGroup(identitasLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(61, 61, 61)
+                        .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtlokasi, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbfakultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        identitasLayout.setVerticalGroup(
+            identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(identitasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtlokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(identitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbfakultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(identitas, "card2");
 
         btnnew.setText("Baru");
         btnnew.addActionListener(new java.awt.event.ActionListener() {
@@ -1908,7 +1926,7 @@ public void input(){
         identitas.setVisible(true);
         btnnext.setEnabled(true);
         btnprev.setEnabled(true);
-        identitas.setVisible(false);
+        //identitas.setVisible(false);
         steker.setVisible(false);
         lampu.setVisible(false);
         ac.setVisible(false);
@@ -2428,6 +2446,7 @@ else if(lcd.isShowing()){
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
